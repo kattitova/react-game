@@ -1,0 +1,37 @@
+@import "./components/abstracts/mixins";
+@import "./components/intro/intro";
+@import "./components/intro/animation/animation";
+@import "./components/intro/intro-text/intro-text";
+@import "./components/intro/menu/menu";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+@font-face {
+  font-family: Blogger;
+  src: url("./assets/fonts/BloggerSans.ttf");
+}
+
+@font-face {
+  font-family: BloggerBold;
+  src: url("./assets/fonts/BloggerSansBold.ttf");
+}
+
+#root {
+  @include size(100vw, 100vh);
+  font-family: "Blogger";
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+button {
+  cursor: pointer;
+  font-family: "Blogger";
+}

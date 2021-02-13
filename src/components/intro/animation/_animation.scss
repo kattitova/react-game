@@ -1,0 +1,80 @@
+.intro__animation {
+  @include size(100%, 100%);
+}
+
+.stars-1 {
+  animation: stars-blinking 5s linear infinite;
+  background: url("./assets/img/stars.png");
+  background-size: cover;
+  bottom: 0;
+  display: block;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.stars-2 {
+  animation: stars-blinking-reverse 5s linear infinite;
+  background: url("./assets/img/stars.png");
+  background-size: cover;
+  bottom: 0;
+  display: block;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(180deg);
+  z-index: 0;
+}
+
+.rockets {
+  @include absolute-center;
+  @include size(90vh, 90vh);
+  animation: rockets-rotate 10s linear infinite;
+  background: url("./assets/img/rockets.png");
+  background-size: cover;
+  margin: -45vh;
+  z-index: 1;
+}
+
+@keyframes rockets-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes stars-blinking {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes stars-blinking-reverse {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,18 @@
+@mixin size($w, $h) {
+  height: $h;
+  width: $w;
+}
+
+@mixin absolute-center {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin flex($dir: row, $jc: center, $ai: center) {
+  align-items: $ai;
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc;
+}

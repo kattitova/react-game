@@ -1,0 +1,13 @@
+.intro__text {
+  display: none;
+
+  &.active {
+    @include flex(column);
+  }
+
+  &--string {
+    display: block;
+    margin-bottom: 2vh;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+  }
+}

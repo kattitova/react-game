@@ -1,0 +1,38 @@
+.intro {
+  @include absolute-center;
+  @include size(100vw, 100vh);
+  background: linear-gradient(
+    180deg,
+    rgba(4, 31, 52, 1) 0%,
+    rgba(2, 68, 102, 1) 100%
+  );
+
+  &__wrapper {
+    @include absolute-center;
+    @include flex(column);
+    @include size(50vh, 45vh);
+    background: url("./assets/img/intro-bg.png") no-repeat;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  button {
+    @include size(116px, 58px);
+    background: url("./assets/img/button.png");
+    border: 0;
+    color: #ff1e00;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 4vh;
+    outline: none;
+    transition: font-size 0.5s;
+
+    &:hover {
+      font-size: 2.5rem;
+    }
+  }
+}
