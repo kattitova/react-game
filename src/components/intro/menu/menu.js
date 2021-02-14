@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 export default class Menu extends Component {
   menuItemsData = [
-    { name: "newGame", title: "Новая игра" },
-    { name: "continueGame", title: "Продолжить" },
+    { name: "new-game", title: "Новая игра" },
+    { name: "continue-game", title: "Продолжить" },
     { name: "settings", title: "Настройки" },
     { name: "stats", title: "Статистика" },
     { name: "score", title: "Топ игр" },

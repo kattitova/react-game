@@ -23,6 +23,27 @@ html {
   src: url("./assets/fonts/BloggerSansBold.ttf");
 }
 
+#loader {
+  @include absolute-center;
+  @include flex;
+  @include size(100vw, 100vh);
+  animation: hide-loader 1s forwards;
+  animation-delay: 3s;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 31, 52, 1) 0%,
+    rgba(2, 68, 102, 1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes hide-loader {
+  100% {
+    opacity: 0;
+  }
+}
+
 #root {
   @include size(100vw, 100vh);
   font-family: "Blogger";

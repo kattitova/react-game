@@ -4,15 +4,74 @@
   &.active {
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: start;
   }
 
   button {
+    @include flex(row, flex-start);
+    background: none;
+    border: 0;
+    color: #fff;
     font-size: 1.8rem;
     margin-top: 0;
+    position: relative;
 
-    &:hover {
+    &::before {
+      @include flex;
+      @include size(3.5rem, 3rem);
+      background: url("./assets/img/button-sm.png");
+      background-size: cover;
+      color: #ff1e00;
+      content: "";
+      filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+      font-family: "Font Awesome 5 Free";
       font-size: 2rem;
+      font-weight: 900;
+      margin-right: 1rem;
+      transition: font-size 0.5s;
+    }
+
+    &::after {
+      @include size(0, 2px);
+      background: #fff;
+      bottom: -1px;
+      content: "";
+      left: 5rem;
+      position: absolute;
+      transition: width 0.5s;
+    }
+
+    &.new-game::before {
+      content: "\f135";
+    }
+
+    &.continue-game::before {
+      content: "\f064";
+    }
+
+    &.settings::before {
+      content: "\f013";
+    }
+
+    &.stats::before {
+      content: "\f201";
+    }
+
+    &.score::before {
+      content: "\f5a2";
+    }
+
+    &.info::before {
+      content: "\f129";
+    }
+
+    &:hover::before {
+      font-size: 2.3rem;
+    }
+
+    &:hover::after {
+      width: calc(100% - 5rem);
     }
   }
 }
