@@ -7,6 +7,7 @@ export default class Intro extends Component {
   constructor() {
     super();
     this.state = {
+      intro: "intro",
       text: "active",
       menu: "",
     };
@@ -21,14 +22,32 @@ export default class Intro extends Component {
     );
   }
 
+  onMenuItemClick = (id) => {
+    const { intro } = this.state;
+    let introClass = intro;
+    switch (id) {
+      case "new-game":
+        introClass += " hidden";
+        this.setState({ intro: introClass });
+        break;
+
+      case "continue-game":
+        introClass += " hidden";
+        this.setState({ intro: introClass });
+        break;
+
+      default: break;
+    }
+  }
+
   render() {
-    const { text, menu } = this.state;
+    const { intro, text, menu } = this.state;
     return (
-      <div className="intro">
+      <div className={intro}>
         <Animation />
         <div className="intro__wrapper">
           <IntroText textClass={text} onChangeClass={this.changeClass} />
-          <Menu menuClass={menu} />
+          <Menu menuClass={menu} onMenuItemClick={this.onMenuItemClick} />
         </div>
       </div>
     );

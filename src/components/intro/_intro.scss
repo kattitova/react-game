@@ -6,6 +6,7 @@
     rgba(4, 31, 52, 1) 0%,
     rgba(2, 68, 102, 1) 100%
   );
+  z-index: 1;
 
   &__wrapper {
     @include absolute-center;

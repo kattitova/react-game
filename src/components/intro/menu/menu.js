@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Menu extends Component {
   menuItemsData = [
@@ -11,11 +12,18 @@ export default class Menu extends Component {
   ];
 
   render() {
-    const { menuClass } = this.props;
+    const { menuClass, onMenuItemClick } = this.props;
     const setClass = `intro__menu ${menuClass}`;
 
     const menuItems = this.menuItemsData.map(item => (
-      <button type="button" key={item.name} className={item.name}>{item.title}</button>
+      <button
+        type="button"
+        key={item.name}
+        className={item.name}
+        onClick={() => { onMenuItemClick(item.name); }}
+      >
+        {item.title}
+      </button>
     ));
 
     return (
@@ -25,3 +33,13 @@ export default class Menu extends Component {
     );
   }
 }
+
+Menu.propTypes = {
+  menuClass: PropTypes.string,
+  onMenuItemClick: PropTypes.func,
+};
+
+Menu.defaultProps = {
+  menuClass: null,
+  onMenuItemClick: null,
+};
