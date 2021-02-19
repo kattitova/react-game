@@ -3,6 +3,9 @@
 @import "./components/intro/animation/animation";
 @import "./components/intro/intro-text/intro-text";
 @import "./components/intro/menu/menu";
+@import "./components/game/game";
+@import "./components/game/game-level-1/game-level-1";
+@import "./components/game/game-level-1/level-1-sublevel/level-1-sublevel";
 
 * {
   box-sizing: border-box;
@@ -35,7 +38,7 @@ html {
     rgba(2, 68, 102, 1) 100%
   );
   pointer-events: none;
-  z-index: 2;
+  z-index: 11;
 }
 
 @keyframes hide-loader {
@@ -58,12 +61,10 @@ button {
   outline: none;
 }
 
-.hidden {
-  display: none !important;
+a {
+  text-decoration: none;
 }
 
-.game {
-  @include size(100vw, 100vh);
-  background: #444;
-  overflow: hidden;
+.hidden {
+  display: none !important;
 }

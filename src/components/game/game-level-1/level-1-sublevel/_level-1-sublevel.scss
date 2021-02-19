@@ -1,0 +1,25 @@
+.level-1__letters {
+  @include absolute-center;
+  @include flex;
+  @include size(100vw, 100vh);
+  background: url("./assets/img/stars.png") center center no-repeat,
+    linear-gradient(180deg, rgba(4, 31, 52, 1) 0%, rgba(2, 68, 102, 1) 100%);
+  background-size: cover;
+  z-index: 3;
+}
+
+.letters__container {
+  offset-path: path("M 100,200 Q 200,20 300,200");
+  offset-distance: 0%;
+  animation: red-ball 2s linear alternate infinite;
+}
+
+@keyframes red-ball {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}

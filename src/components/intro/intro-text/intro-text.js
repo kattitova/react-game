@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class IntroText extends Component {
   render() {
-    const { textClass, onChangeClass } = this.props;
+    const { textClass, onClickStartButton } = this.props;
     const setClass = `intro__text ${textClass}`;
 
     return (
@@ -12,7 +12,7 @@ export default class IntroText extends Component {
         <button
           type="button"
           className="intro__text--button"
-          onClick={onChangeClass}
+          onClick={onClickStartButton}
         >
           Старт
         </button>

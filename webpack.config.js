@@ -8,6 +8,11 @@ module.exports = {
     path: path.join(__dirname, "/dist"),
     filename: "bundle.js",
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: "./",
+    hot: true,
+  },
   module: {
     rules: [
       {
@@ -33,12 +38,16 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         loader: "file-loader",
         options: {
           name: "[path][name].[ext]",
           publicPath: "./",
         },
+      },
+      {
+        test: /\.svg$/,
+        loader: "raw-loader",
       },
       {
         test: /\.(woff2?|ttf|otf|eot)$/,

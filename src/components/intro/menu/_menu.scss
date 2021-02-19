@@ -8,12 +8,13 @@
     justify-items: start;
   }
 
-  button {
+  a {
     @include flex(row, flex-start);
     background: none;
     border: 0;
     color: #fff;
     font-size: 1.8rem;
+    font-weight: 400;
     margin-top: 0;
     position: relative;
 
@@ -37,7 +38,7 @@
       background: #fff;
       bottom: -1px;
       content: "";
-      left: 5rem;
+      left: 4.5rem;
       position: absolute;
       transition: width 0.5s;
     }

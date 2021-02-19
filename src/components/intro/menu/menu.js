@@ -1,29 +1,29 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export default class Menu extends Component {
   menuItemsData = [
-    { name: "new-game", title: "Новая игра" },
-    { name: "continue-game", title: "Продолжить" },
-    { name: "settings", title: "Настройки" },
-    { name: "stats", title: "Статистика" },
-    { name: "score", title: "Топ игр" },
-    { name: "info", title: "Об игре" },
+    { name: "new-game", title: "Новая игра", path: "/game" },
+    { name: "continue-game", title: "Продолжить", path: "/game" },
+    { name: "settings", title: "Настройки", path: "/settins" },
+    { name: "stats", title: "Статистика", path: "/stats" },
+    { name: "score", title: "Топ игр", path: "/score" },
+    { name: "info", title: "Об игре", path: "/info" },
   ];
 
   render() {
-    const { menuClass, onMenuItemClick } = this.props;
+    const { menuClass } = this.props;
     const setClass = `intro__menu ${menuClass}`;
 
     const menuItems = this.menuItemsData.map(item => (
-      <button
-        type="button"
+      <Link
         key={item.name}
         className={item.name}
-        onClick={() => { onMenuItemClick(item.name); }}
+        to={item.path}
       >
-        {item.title}
-      </button>
+        <span>{item.title}</span>
+      </Link>
     ));
 
     return (
@@ -36,10 +36,8 @@ export default class Menu extends Component {
 
 Menu.propTypes = {
   menuClass: PropTypes.string,
-  onMenuItemClick: PropTypes.func,
 };
 
 Menu.defaultProps = {
   menuClass: null,
-  onMenuItemClick: null,
 };
