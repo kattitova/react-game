@@ -9,9 +9,134 @@
 }
 
 .letters__container {
-  offset-path: path("M 100,200 Q 200,20 300,200");
-  offset-distance: 0%;
-  animation: red-ball 2s linear alternate infinite;
+  // offset-path: path("M 100,200 Q 200,20 300,200");
+  // offset-distance: 0%;
+  // animation: red-ball 2s linear alternate infinite;
+}
+
+.next-letter,
+.prev-letter {
+  text-transform: uppercase;
+
+  &.disabled {
+    opacity: 0;
+  }
+}
+
+.next-letter::before {
+  content: "\f30b";
+  font-family: "Font Awesome 5 Free";
+  font-size: 2rem;
+  font-weight: 900;
+  margin-right: 1rem;
+}
+
+.prev-letter::after {
+  content: "\f30a";
+  font-family: "Font Awesome 5 Free";
+  font-size: 2rem;
+  font-weight: 900;
+  margin-left: 1rem;
+}
+
+.planet__letterA {
+  color: #fff;
+  cursor: pointer;
+  font-size: 3.8vw;
+  left: 50%;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+
+  &.first {
+    bottom: 2rem;
+  }
+
+  &.second {
+    top: 2rem;
+  }
+}
+
+.rocket {
+  position: absolute;
+
+  svg {
+    @include size(26.7vw);
+
+    #rocket-shadow {
+      mix-blend-mode: multiply;
+    }
+
+    #rocket-inner-flame {
+      animation: innerFlame 1s infinite linear;
+    }
+
+    #rocket-outer-flame {
+      animation: outerFlame 1s infinite linear;
+    }
+  }
+
+  &.start {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__letterB {
+    color: #000;
+    font-family: "BloggerBold";
+    font-size: 3.8vw;
+    left: 40%;
+    position: absolute;
+    text-transform: uppercase;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.wide {
+      left: 39%;
+    }
+  }
+}
+
+@keyframes outerFlame {
+  0% {
+    fill: rgb(255, 0, 0);
+  }
+
+  33% {
+    fill: rgb(255, 165, 0);
+  }
+
+  66% {
+    fill: rgb(255, 255, 0);
+  }
+
+  75% {
+    fill: rgb(255, 165, 0);
+  }
+
+  100% {
+    fill: rgb(255, 0, 0);
+  }
+}
+
+@keyframes innerFlame {
+  0% {
+    fill: rgb(255, 165, 0);
+  }
+
+  33% {
+    fill: rgb(255, 255, 0);
+  }
+
+  66% {
+    fill: rgb(255, 165, 0);
+  }
+
+  100% {
+    fill: rgb(255, 0, 0);
+  }
 }
 
 @keyframes red-ball {

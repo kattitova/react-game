@@ -1,4 +1,4 @@
-@mixin size($w, $h) {
+@mixin size($w, $h: auto) {
   height: $h;
   width: $w;
 }

@@ -29,6 +29,33 @@
     cursor: pointer;
     position: relative;
     text-transform: uppercase;
+
+    &.numStars-1 {
+      .sub-level__star:first-child {
+        path {
+          fill: url("#star-fill");
+          stroke: #ff772c;
+        }
+      }
+    }
+
+    &.numStars-2 {
+      .sub-level__star:not(:last-child) {
+        path {
+          fill: url("#star-fill");
+          stroke: #ff772c;
+        }
+      }
+    }
+
+    &.numStars-3 {
+      .sub-level__star {
+        path {
+          fill: url("#star-fill");
+          stroke: #ff772c;
+        }
+      }
+    }
   }
 
   .sub-level__stars {
@@ -54,10 +81,14 @@
     }
   }
 
-  .sub-level__star.done {
-    path {
-      fill: url("#star-fill");
-      stroke: #ff772c;
+  .sub-level__star {
+    &.numStars-1 {
+      .sub-level__stars:first-child {
+        path {
+          fill: url("#star-fill");
+          stroke: #ff772c;
+        }
+      }
     }
   }
 }

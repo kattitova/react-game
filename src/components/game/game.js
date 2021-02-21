@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from "react";
 import { Route, Switch, Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import GameLevel1 from "./game-level-1";
 import BackButton from "./back-button";
 
@@ -42,6 +43,7 @@ export default class Game extends Component {
       </Link>
     ));
 
+    const { gameLetters, onEndGame } = this.props;
 
     return (
       <div className="game">
@@ -53,10 +55,20 @@ export default class Game extends Component {
         </div>
         <Switch>
           <Route path="/game/level-1">
-            <GameLevel1 />
+            <GameLevel1 gameLetters={gameLetters} onEndGame={onEndGame} />
           </Route>
         </Switch>
       </div>
     );
   }
 }
+
+Game.propTypes = {
+  gameLetters: PropTypes.arrayOf(PropTypes.object),
+  onEndGame: PropTypes.func,
+};
+
+Game.defaultProps = {
+  gameLetters: null,
+  onEndGame: null,
+};

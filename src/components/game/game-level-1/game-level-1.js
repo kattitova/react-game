@@ -6,32 +6,39 @@ import SVGInline from "react-svg-inline";
 import starSVG from "../../../assets/img/star.svg";
 import BackButton from "../back-button";
 import Level1Sublevel from "./level-1-sublevel";
+import { lettersB } from "../../app/app";
 
 export default class GameLevel1 extends Component {
-  lettersA = ["а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"];
-
-  lettersB = ["б", "в", "г", "д", "ж", "з", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ"];
-
   stars = [1, 2, 3];
 
-  getSubLevel = () => this.lettersB.map((item, ind) => (
-    <Link
-      key={`letter-${ind}`}
-      to={{
-        pathname: "/game/level-1/letters",
-        propsLetter: item,
-      }}
-    >
-      <div className="level-1__sub-level" data-letter={`letter-${ind}`}>
-        <span>{item}</span>
-        <div className="sub-level__stars">
-          {this.stars.map(star => <div key={`star-${star}`} className="sub-level__star"><SVGInline svg={starSVG} /></div>)}
+  // get nuber of stars for all sub-levels from state
+  getStars = (letterB) => {
+    const { gameLetters } = this.props;
+    return gameLetters.filter(el => el.symb === letterB)[0].stars;
+  }
+
+  getSubLevel = () => (
+    lettersB.map((item, ind) => (
+      <Link
+        key={`letter-${ind}`}
+        to={{
+          pathname: "/game/level-1/letters",
+          propsLetter: item,
+        }}
+      >
+        <div className={`level-1__sub-level numStars-${this.getStars(item)}`} data-letter={`letter-${ind}`}>
+          <span>{item}</span>
+          <div className="sub-level__stars">
+            {this.stars.map(star => <div key={`star-${star}`} className="sub-level__star"><SVGInline svg={starSVG} /></div>)}
+          </div>
         </div>
-      </div>
-    </Link>
-  ))
+      </Link>
+    ))
+  )
 
   render() {
+    const { onEndGame } = this.props;
+
     return (
       <div className="game__level-1">
         <div className="game__button-container">
@@ -43,7 +50,7 @@ export default class GameLevel1 extends Component {
         </div>
         <Switch>
           <Route path="/game/level-1/letters">
-            <Level1Sublevel text="Text" />
+            <Level1Sublevel text="Text" onEndGame={onEndGame} />
           </Route>
         </Switch>
       </div>
@@ -52,11 +59,11 @@ export default class GameLevel1 extends Component {
 }
 
 GameLevel1.propTypes = {
-  levelClass: PropTypes.string,
-  onBackToMenu: PropTypes.func,
+  gameLetters: PropTypes.arrayOf(PropTypes.object),
+  onEndGame: PropTypes.func,
 };
 
 GameLevel1.defaultProps = {
-  levelClass: null,
-  onBackToMenu: null,
+  gameLetters: null,
+  onEndGame: null,
 };
