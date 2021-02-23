@@ -6,7 +6,7 @@
   background-size: cover;
 
   .level-1__sub-levels-container {
-    @include size(60vw, 80vh);
+    @include size(auto, 80vh);
     align-items: center;
     display: grid;
     font-family: "BloggerBold";

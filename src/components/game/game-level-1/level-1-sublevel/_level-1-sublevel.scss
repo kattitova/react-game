@@ -47,13 +47,14 @@
   position: absolute;
   text-transform: uppercase;
   transform: translateX(-50%);
+  z-index: 1;
 
   &.first {
-    bottom: 2rem;
+    bottom: 5rem;
   }
 
   &.second {
-    top: 2rem;
+    top: 5.5rem;
   }
 }
 
@@ -77,6 +78,7 @@
   }
 
   &.start {
+    offset-path: none !important;
     position: absolute;
     right: 0;
     top: 50%;
@@ -95,6 +97,23 @@
 
     &.wide {
       left: 39%;
+    }
+  }
+
+  &.on-first-letter {
+    animation: rocket-on-first-letter 1.5s linear forwards;
+    offset-distance: 0%;
+    offset-rotate: reverse;
+  }
+
+  &.on-second-letter {
+    animation: rocket-on-second-letter 2.5s linear forwards;
+    offset-distance: 0%;
+    offset-rotate: reverse;
+
+    .rocket__letterB {
+      top: 28%;
+      transform: rotate(180deg);
     }
   }
 }
@@ -139,7 +158,17 @@
   }
 }
 
-@keyframes red-ball {
+@keyframes rocket-on-first-letter {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes rocket-on-second-letter {
   from {
     offset-distance: 0%;
   }
