@@ -8,25 +8,31 @@
   z-index: 3;
 }
 
-.letters__container {
-  // offset-path: path("M 100,200 Q 200,20 300,200");
-  // offset-distance: 0%;
-  // animation: red-ball 2s linear alternate infinite;
-}
-
 .next-letter,
-.prev-letter {
+.prev-letter,
+.close-game {
+  @include flex;
+  @include size(100px, 50px);
+  background: url("./assets/img/button.png");
+  background-size: cover;
+  border: 0;
+  color: #ff1e00;
+  filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+  font-family: "BloggerBold";
+  font-size: 2.5rem;
+  padding-top: 5px;
+  text-align: center;
   text-transform: uppercase;
 
   &.disabled {
-    opacity: 0;
+    opacity: 0.3;
   }
 }
 
 .next-letter::before {
   content: "\f30b";
   font-family: "Font Awesome 5 Free";
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 900;
   margin-right: 1rem;
 }
@@ -34,32 +40,38 @@
 .prev-letter::after {
   content: "\f30a";
   font-family: "Font Awesome 5 Free";
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 900;
   margin-left: 1rem;
 }
 
+.close-game {
+  font-size: 1.4rem;
+}
+
 .planet__letterA {
-  color: #fff;
+  color: #ff1e00;
   cursor: pointer;
+  font-family: "BloggerBold";
   font-size: 3.8vw;
   left: 50%;
   position: absolute;
   text-transform: uppercase;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 2;
 
   &.first {
-    bottom: 5rem;
+    bottom: 50px;
   }
 
   &.second {
-    top: 5.5rem;
+    top: 55px;
   }
 }
 
 .rocket {
   position: absolute;
+  z-index: 1;
 
   svg {
     @include size(26.7vw);
@@ -114,6 +126,44 @@
     .rocket__letterB {
       top: 28%;
       transform: rotate(180deg);
+    }
+  }
+
+  &.rocket-color {
+    &--prp {
+      #rocket-body {
+        fill: rgb(145, 1, 145);
+      }
+    }
+
+    &--grn {
+      #rocket-body {
+        fill: rgb(8, 197, 1);
+      }
+    }
+
+    &--red {
+      #rocket-body {
+        fill: rgb(235, 5, 5);
+      }
+    }
+
+    &--blue {
+      #rocket-body {
+        fill: rgb(20, 143, 243);
+      }
+    }
+
+    &--yel {
+      #rocket-body {
+        fill: rgb(255, 238, 0);
+      }
+    }
+
+    &--gray {
+      #rocket-body {
+        fill: #b5c5c6;
+      }
     }
   }
 }

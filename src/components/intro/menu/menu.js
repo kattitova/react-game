@@ -6,7 +6,7 @@ export default class Menu extends Component {
   menuItemsData = [
     { name: "new-game", title: "Новая игра", path: "/game" },
     { name: "continue-game", title: "Продолжить", path: "/game" },
-    { name: "settings", title: "Настройки", path: "/settins" },
+    { name: "settings", title: "Настройки", path: "/settings" },
     { name: "stats", title: "Статистика", path: "/stats" },
     { name: "score", title: "Топ игр", path: "/score" },
     { name: "info", title: "Об игре", path: "/info" },

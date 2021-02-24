@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
 } from "react-router-dom";
@@ -8,6 +8,7 @@ import {
 import Intro from "../intro";
 import Game from "../game";
 import Stats from "../intro/stats";
+import Settings from "../intro/settings";
 
 export const lettersA = ["а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"];
 
@@ -21,6 +22,7 @@ export default class App extends Component {
       introTextClass: "active",
       menuClass: "",
       gameLetters: this.getLettersLevelInitState(),
+      rocketColor: "rocket-color--gray",
     };
   }
 
@@ -60,10 +62,13 @@ export default class App extends Component {
     let stars = 0;
     Object.keys(countLetters).forEach((letter) => {
       sum += parseInt(countLetters[letter], 10) > 2 ? 2 : parseInt(countLetters[letter], 10);
-      if (sum > 0 && sum < 8) stars = 1;
-      else if (sum < 15) stars = 2;
-      else if (sum < 21) stars = 3;
     });
+
+    if (sum === 0) stars = 0;
+    else if (sum > 0 && sum < 8) stars = 1;
+    else if (sum < 15) stars = 2;
+    else if (sum < 21) stars = 3;
+
     return stars;
   }
 
@@ -84,9 +89,15 @@ export default class App extends Component {
     });
   }
 
+  // get settings Rocket Color
+  getRocketColor = (color) => {
+    console.log(color);
+    this.setState({ rocketColor: `rocket-color--${color}` });
+  }
+
   render() {
     const {
-      introClass, introTextClass, menuClass, gameLetters,
+      introClass, introTextClass, menuClass, gameLetters, rocketColor,
     } = this.state;
 
     return (
@@ -104,11 +115,14 @@ export default class App extends Component {
             </Route>
             {/* page with games */}
             <Route path="/game">
-              <Game gameLetters={gameLetters} onEndGame={this.onEndGame} />
+              <Game gameLetters={gameLetters} onEndGame={this.onEndGame} rocketColor={rocketColor} />
             </Route>
             {/* statistic page */}
             <Route path="/stats">
               <Stats gameLetters={gameLetters} />
+            </Route>
+            <Route path="/settings">
+              <Settings getRocketColor={this.getRocketColor} rocketColor={rocketColor} />
             </Route>
           </Switch>
         </div>

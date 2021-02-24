@@ -37,7 +37,7 @@ export default class GameLevel1 extends Component {
   )
 
   render() {
-    const { onEndGame } = this.props;
+    const { onEndGame, rocketColor } = this.props;
 
     return (
       <div className="game__level-1">
@@ -50,7 +50,7 @@ export default class GameLevel1 extends Component {
         </div>
         <Switch>
           <Route path="/game/level-1/letters">
-            <Level1Sublevel text="Text" onEndGame={onEndGame} />
+            <Level1Sublevel onEndGame={onEndGame} rocketColor={rocketColor} />
           </Route>
         </Switch>
       </div>
@@ -61,9 +61,11 @@ export default class GameLevel1 extends Component {
 GameLevel1.propTypes = {
   gameLetters: PropTypes.arrayOf(PropTypes.object),
   onEndGame: PropTypes.func,
+  rocketColor: PropTypes.string,
 };
 
 GameLevel1.defaultProps = {
   gameLetters: null,
   onEndGame: null,
+  rocketColor: null,
 };

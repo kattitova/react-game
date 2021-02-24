@@ -3,9 +3,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    main: path.resolve(__dirname, "./src/index.js"),
+  },
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.resolve(__dirname, "./dist"),
     filename: "bundle.js",
   },
   devServer: {
@@ -67,7 +69,7 @@ module.exports = {
         use: [{
           loader: "file-loader",
           options: {
-            name: "sounds/[hash]-[name].[ext]",
+            name: "[path][name].[ext]",
           },
         }],
       },
@@ -75,14 +77,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: path.resolve(__dirname, "./src/index.html"),
+      filename: "index.html",
     }),
     new CopyPlugin({
       patterns: [
         {
-          context: path.resolve(__dirname, "src"),
-          from: "./assets",
-          to: "./dist/assets",
+          from: path.resolve(__dirname, "./src/assets"),
+          to: path.resolve(__dirname, "./dist/src/assets"),
         },
       ],
     }),

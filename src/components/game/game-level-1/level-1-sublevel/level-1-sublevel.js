@@ -3,11 +3,22 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 import SVGInline from "react-svg-inline";
 import rocketSVG from "../../../../assets/img/rocket-letters.svg";
 import { lettersA } from "../../../app/app";
+import PlaySound from "../../../play-sound";
+import Planet from "./planet";
 
-export default function Level1Sublevel({ text, onEndGame }) {
+export default function Level1Sublevel({ onEndGame, rocketColor }) {
+  function genPlanetImg() {
+    const num = Math.floor(Math.random() * 6) + 1;
+    const style = {
+      background: `url("/src/assets/img/planets/${num}.png")`,
+    };
+    return style;
+  }
+
   const location = useLocation();
   const letterB = location.propsLetter;
   const wideLettersB = ["ж", "м", "ф", "ш", "щ"];
@@ -19,6 +30,7 @@ export default function Level1Sublevel({ text, onEndGame }) {
   });
   const [rocketClass, setRocketClass] = useState("rocket start");
   const [rocketStyle, setRocketStyle] = useState(null);
+  const [planetStyle, setPlanetStyle] = useState(genPlanetImg());
   const rocketRef = useRef(null);
 
   // calc rocket flying path
@@ -33,7 +45,7 @@ export default function Level1Sublevel({ text, onEndGame }) {
     }
 
     const dx = flag === 2 ? -start.width / 4 : start.width / 4;
-    const dy = flag === 2 ? 5 : 0;
+    const dy = flag === 2 ? 10 : 0;
     const X1 = calcCoord(start.left, start.width) - (window.innerWidth - start.width) / 2;
     const Y1 = calcCoord(start.top, start.height) - (window.innerHeight - start.height) / 2;
     const X3 = calcCoord(end.left, end.width) - (window.innerWidth - start.width) / 2 + dx;
@@ -65,13 +77,16 @@ export default function Level1Sublevel({ text, onEndGame }) {
     let path;
 
     if (e.target.classList.contains("first")) {
-      path = rocketRef.current.classList.contains("on-second-letter") ? calcArc(rocketObj, letterObj, 3) : calcArc(rocketObj, letterObj, 1);
+      if (!rocketRef.current.classList.contains("on-first-letter")) {
+        path = rocketRef.current.classList.contains("on-second-letter") ? calcArc(rocketObj, letterObj, 3) : calcArc(rocketObj, letterObj, 1);
+      }
       setRocketClass("rocket on-first-letter");
-      console.log(rocketRef.current.className);
+      PlaySound(`${letterA.symb}${letterB}.mp3`, 1000, 1.0); // TODO 1 - volume set from Setting State
     }
     if (e.target.classList.contains("second")) {
       path = calcArc(rocketObj, letterObj, 2);
       setRocketClass("rocket on-second-letter");
+      PlaySound(`${letterB}${letterA.symb}.mp3`, 2000, 0.2); // TODO 1 - volume set from Setting State
     }
     const style = {
       "offsetPath": `path("${path}")`,
@@ -79,12 +94,14 @@ export default function Level1Sublevel({ text, onEndGame }) {
     setRocketStyle(style);
   }
 
+  function changeLetterA(i) {
+    setLetterA({ ind: letterA.ind + i, symb: lettersA[letterA.ind + i] });
+    setRocketClass("rocket start");
+    setPlanetStyle(genPlanetImg());
+  }
+
   return (
     <div className="level-1__letters">
-      <div className="letters__container">
-        {text}
-      </div>
-
       {/* bottom A letter */}
       <div
         className="planet__letterA first"
@@ -102,7 +119,7 @@ export default function Level1Sublevel({ text, onEndGame }) {
       </div>
 
       {/* rocket */}
-      <div className={rocketClass} style={rocketStyle} ref={rocketRef}>
+      <div className={`${rocketClass} ${rocketColor}`} style={rocketStyle} ref={rocketRef}>
         <div
           className={!wideLettersB.includes(letterB) ? "rocket__letterB" : "rocket__letterB wide"}
         >
@@ -111,14 +128,16 @@ export default function Level1Sublevel({ text, onEndGame }) {
         <SVGInline svg={rocketSVG} />
       </div>
 
+      <Planet planetClass="planet planet--top" planetStyle={planetStyle} />
+      <Planet planetClass="planet planet--bottom" planetStyle={planetStyle} />
+
       {/* button change on previouse letter */}
       <button
         type="button"
         className={prevLetterClass}
         onClick={() => {
-          setLetterA({ ind: letterA.ind - 1, symb: lettersA[letterA.ind - 1] });
+          changeLetterA(-1);
           setNextClass("next-letter");
-          setRocketClass("rocket start");
           if (letterA.ind < 2) setPrevClass(`${prevLetterClass} disabled`);
         }}
       >
@@ -126,16 +145,21 @@ export default function Level1Sublevel({ text, onEndGame }) {
       </button>
 
       {/* button ending game and send state with sublevel results */}
-      <Link className="close-game" to="/game/level-1" onClick={() => { onEndGame(count, letterB); }}>END GAME</Link>
+      <Link
+        className="close-game"
+        to="/game/level-1"
+        onClick={() => { onEndGame(count, letterB); }}
+      >
+        Закончить игру
+      </Link>
 
       {/* button change on next letter */}
       <button
         type="button"
         className={nextLetterClass}
         onClick={() => {
-          setLetterA({ ind: letterA.ind + 1, symb: lettersA[letterA.ind + 1] });
+          changeLetterA(1);
           setPrevClass("prev-letter");
-          setRocketClass("rocket start");
           if (letterA.ind > 7) setNextClass(`${nextLetterClass} disabled`);
         }}
       >
@@ -144,3 +168,13 @@ export default function Level1Sublevel({ text, onEndGame }) {
     </div>
   );
 }
+
+Level1Sublevel.propTypes = {
+  onEndGame: PropTypes.func,
+  rocketColor: PropTypes.string,
+};
+
+Level1Sublevel.defaultProps = {
+  onEndGame: null,
+  rocketColor: null,
+};

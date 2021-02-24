@@ -1,0 +1,117 @@
+.game__settings {
+  @include absolute-center;
+  @include flex;
+  @include size(100vw, 100vh);
+  background: url("./assets/img/stars.png") center center no-repeat,
+    linear-gradient(180deg, rgba(4, 31, 52, 1) 0%, rgba(2, 68, 102, 1) 100%);
+  background-size: cover;
+  font-size: 1.6rem;
+  z-index: 3;
+}
+
+.settings__wrapper {
+  @include absolute-center;
+  @include flex(column);
+  @include size(400px, 460px);
+  background: url("./assets/img/intro-bg.png") no-repeat;
+  background-size: cover;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 2rem;
+  z-index: 9;
+}
+
+.settings__rocket-color {
+  @include flex(column);
+  border: 2px dashed #fff;
+  border-radius: 1rem;
+  padding: 15px 10px;
+
+  .rocket-color__palette {
+    @include flex;
+    margin: 10px 0;
+
+    .rocket-color:not(:last-child) {
+      margin-right: 5px;
+    }
+
+    .rocket-color {
+      @include size(30px, 30px);
+      border: 1px solid #fff;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2) inset;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 2px 1px #fff;
+      }
+
+      &--prp {
+        background: rgb(145, 1, 145);
+      }
+
+      &--grn {
+        background: rgb(8, 197, 1);
+      }
+
+      &--red {
+        background: rgb(235, 5, 5);
+      }
+
+      &--blue {
+        background: rgb(20, 143, 243);
+      }
+
+      &--yel {
+        background: rgb(255, 238, 0);
+      }
+
+      &--gray {
+        background: #b5c5c6;
+      }
+    }
+  }
+
+  #rocket-shadow {
+    mix-blend-mode: multiply;
+  }
+
+  .rocket-color__template {
+    &.rocket-color {
+      &--prp {
+        #rocket-body {
+          fill: rgb(145, 1, 145);
+        }
+      }
+
+      &--grn {
+        #rocket-body {
+          fill: rgb(8, 197, 1);
+        }
+      }
+
+      &--red {
+        #rocket-body {
+          fill: rgb(235, 5, 5);
+        }
+      }
+
+      &--blue {
+        #rocket-body {
+          fill: rgb(20, 143, 243);
+        }
+      }
+
+      &--yel {
+        #rocket-body {
+          fill: rgb(255, 238, 0);
+        }
+      }
+
+      &--gray {
+        #rocket-body {
+          fill: #b5c5c6;
+        }
+      }
+    }
+  }
+}
