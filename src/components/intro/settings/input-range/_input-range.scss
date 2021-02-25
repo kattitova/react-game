@@ -1,0 +1,28 @@
+.input-range {
+  @include flex(column);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background-color: #fff;
+  border: solid 1px #82cfd0;
+  border-radius: 5px;
+  height: 15px;
+  margin-top: 10px;
+  outline: none;
+  overflow: hidden;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  color: #19cf01;
+  height: 22px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #757575;
+  box-shadow: -80px 0 0 80px #19cf01;
+  height: 15px;
+  width: 15px;
+}

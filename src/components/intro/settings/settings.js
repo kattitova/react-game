@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import SVGInline from "react-svg-inline";
 import rocketSVG from "../../../assets/img/rocket-letters.svg";
 import BackButton from "../../game/back-button";
+import InputRange from "./input-range";
 
 export default class Settings extends Component {
   generateRocketColors = () => {
@@ -22,15 +23,36 @@ export default class Settings extends Component {
   }
 
   render() {
-    const { rocketColor } = this.props;
+    const {
+      rocketColor, soundVolume, musicVolume, onChangeVolume,
+    } = this.props;
     return (
       <div className="game__settings">
         <div className="game__button-container">
           <BackButton buttonClass="button-container__back-menu" path="/" />
         </div>
         <div className="settings__wrapper">
-          <div className="settings__music" />
-          <div className="settings__sound" />
+          {/* Sound settings */}
+          <div className="settings__sound">
+            <InputRange
+              inputLabel="Звуки"
+              inputId="soundVolume"
+              volume={soundVolume}
+              onChangeVolume={onChangeVolume}
+            />
+          </div>
+
+          {/* Background audio settings */}
+          <div className="settings__music">
+            <InputRange
+              inputLabel="Музыка"
+              inputId="musicVolume"
+              volume={musicVolume}
+              onChangeVolume={onChangeVolume}
+            />
+          </div>
+
+          {/* Rocket color settings */}
           <div className="settings__rocket-color">
             Выберите цвет ракеты
             <div className="rocket-color__palette">
@@ -49,9 +71,15 @@ export default class Settings extends Component {
 Settings.propTypes = {
   getRocketColor: PropTypes.func,
   rocketColor: PropTypes.string,
+  onChangeVolume: PropTypes.func,
+  soundVolume: PropTypes.number,
+  musicVolume: PropTypes.number,
 };
 
 Settings.defaultProps = {
   getRocketColor: null,
   rocketColor: null,
+  onChangeVolume: null,
+  soundVolume: null,
+  musicVolume: null,
 };

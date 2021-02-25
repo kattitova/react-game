@@ -21,8 +21,26 @@
   z-index: 9;
 }
 
+datalist {
+  @include flex(row, space-between);
+  @include size(145px);
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.settings__sound,
+.settings__music {
+  @include flex(column);
+  @include size(265px);
+  border: 2px dashed #fff;
+  border-radius: 1rem;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
 .settings__rocket-color {
   @include flex(column);
+  @include size(265px);
   border: 2px dashed #fff;
   border-radius: 1rem;
   padding: 15px 10px;

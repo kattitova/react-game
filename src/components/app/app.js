@@ -9,6 +9,7 @@ import Intro from "../intro";
 import Game from "../game";
 import Stats from "../intro/stats";
 import Settings from "../intro/settings";
+import PlaySound from "../play-sound";
 
 export const lettersA = ["а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"];
 
@@ -23,8 +24,18 @@ export default class App extends Component {
       menuClass: "",
       gameLetters: this.getLettersLevelInitState(),
       rocketColor: "rocket-color--gray",
+      soundVolume: 1,
+      musicVolume: 0,
     };
+    this.musicRef = React.createRef();
   }
+
+  // componentDidMount() {
+  //   const { musicVolume } = this.state;
+  //   //this.musicRef.current.volume = 0.5;
+  //   document.querySelector(".musicVolume").volume = 0.5;
+  //   console.log(document.querySelector(".musicVolume"));
+  // }
 
   // listener click on Start Button to go to Main Menu from Intro
   onClickStartButton = () => {
@@ -91,17 +102,39 @@ export default class App extends Component {
 
   // get settings Rocket Color
   getRocketColor = (color) => {
-    console.log(color);
     this.setState({ rocketColor: `rocket-color--${color}` });
+  }
+
+  // get changing sound and music volume
+  onChangeVolume = (e) => {
+    const volume = parseFloat(e.target.value, 10);
+    this.setState({ [e.target.id]: volume });
+    if (e.target.id === "musicVolume") {
+      // this.musicRef.current.muted = false;
+      const music = document.querySelector(".musicVolume");
+      // this.musicRef.current.volume = volume;
+      music.muted = false;
+      music.volume = volume;
+      console.log(this.musicRef.current.muted);
+    }
   }
 
   render() {
     const {
-      introClass, introTextClass, menuClass, gameLetters, rocketColor,
+      introClass, introTextClass, menuClass, gameLetters, rocketColor, soundVolume, musicVolume,
     } = this.state;
 
     return (
       <Router>
+        <audio
+          ref={this.musicRef}
+          className="musicVolume"
+          autoPlay
+          loop
+          muted
+        >
+          <source src="/src/assets/sounds/bg-audio.mp3" />
+        </audio>
         <div className="game-container">
           <Switch>
             {/* first page with intro and menu */}
@@ -115,14 +148,26 @@ export default class App extends Component {
             </Route>
             {/* page with games */}
             <Route path="/game">
-              <Game gameLetters={gameLetters} onEndGame={this.onEndGame} rocketColor={rocketColor} />
+              <Game
+                gameLetters={gameLetters}
+                onEndGame={this.onEndGame}
+                rocketColor={rocketColor}
+                soundVolume={soundVolume}
+              />
             </Route>
             {/* statistic page */}
             <Route path="/stats">
               <Stats gameLetters={gameLetters} />
             </Route>
             <Route path="/settings">
-              <Settings getRocketColor={this.getRocketColor} rocketColor={rocketColor} />
+              <Settings
+                getRocketColor={this.getRocketColor}
+                rocketColor={rocketColor}
+                onChangeSoundVolume={this.onChangeSoundVolume}
+                soundVolume={soundVolume}
+                musicVolume={musicVolume}
+                onChangeVolume={this.onChangeVolume}
+              />
             </Route>
           </Switch>
         </div>

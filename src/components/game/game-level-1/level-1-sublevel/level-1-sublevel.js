@@ -10,7 +10,7 @@ import { lettersA } from "../../../app/app";
 import PlaySound from "../../../play-sound";
 import Planet from "./planet";
 
-export default function Level1Sublevel({ onEndGame, rocketColor }) {
+export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) {
   function genPlanetImg() {
     const num = Math.floor(Math.random() * 6) + 1;
     const style = {
@@ -81,12 +81,12 @@ export default function Level1Sublevel({ onEndGame, rocketColor }) {
         path = rocketRef.current.classList.contains("on-second-letter") ? calcArc(rocketObj, letterObj, 3) : calcArc(rocketObj, letterObj, 1);
       }
       setRocketClass("rocket on-first-letter");
-      PlaySound(`${letterA.symb}${letterB}.mp3`, 1000, 1.0); // TODO 1 - volume set from Setting State
+      PlaySound(`${letterA.symb}${letterB}.mp3`, 1000, soundVolume);
     }
     if (e.target.classList.contains("second")) {
       path = calcArc(rocketObj, letterObj, 2);
       setRocketClass("rocket on-second-letter");
-      PlaySound(`${letterB}${letterA.symb}.mp3`, 2000, 0.2); // TODO 1 - volume set from Setting State
+      PlaySound(`${letterB}${letterA.symb}.mp3`, 2000, soundVolume);
     }
     const style = {
       "offsetPath": `path("${path}")`,
@@ -172,9 +172,11 @@ export default function Level1Sublevel({ onEndGame, rocketColor }) {
 Level1Sublevel.propTypes = {
   onEndGame: PropTypes.func,
   rocketColor: PropTypes.string,
+  soundVolume: PropTypes.number,
 };
 
 Level1Sublevel.defaultProps = {
   onEndGame: null,
   rocketColor: null,
+  soundVolume: null,
 };
