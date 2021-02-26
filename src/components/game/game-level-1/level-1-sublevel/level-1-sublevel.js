@@ -10,15 +10,15 @@ import { lettersA } from "../../../app/app";
 import PlaySound from "../../../play-sound";
 import Planet from "./planet";
 
-export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) {
-  function genPlanetImg() {
-    const num = Math.floor(Math.random() * 6) + 1;
-    const style = {
-      background: `url("/src/assets/img/planets/${num}.png")`,
-    };
-    return style;
-  }
+export function genPlanetImg() {
+  const num = Math.floor(Math.random() * 6) + 1;
+  const style = {
+    background: `url("/src/assets/img/planets/${num}.png")`,
+  };
+  return style;
+}
 
+export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) {
   const location = useLocation();
   const letterB = location.propsLetter;
   const wideLettersB = ["ж", "м", "ф", "ш", "щ"];

@@ -1,0 +1,41 @@
+.game__level-2 {
+  @include flex;
+  @include size(100vw, 100vh);
+  background: url("./assets/img/stars.png") center center no-repeat,
+    linear-gradient(180deg, rgba(4, 31, 52, 1) 0%, rgba(2, 68, 102, 1) 100%);
+  background-size: cover;
+}
+
+.level-2__sub-levels-container {
+  @include size(auto, 80vh);
+  align-items: center;
+  display: grid;
+  font-family: "BloggerBold";
+  font-size: 2rem;
+  grid-gap: 2rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+
+  a {
+    color: #fff !important;
+  }
+}
+
+.level-2__sub-level {
+  @include flex;
+  @include size(11rem, 11rem);
+  background: url("./assets/img/sub-level-bg.png") no-repeat;
+  background-size: cover;
+  border-radius: 1rem;
+  cursor: pointer;
+  position: relative;
+  text-transform: uppercase;
+
+  .sub-level__title {
+    @include flex(column);
+
+    span {
+      font-size: 3.5rem;
+    }
+  }
+}

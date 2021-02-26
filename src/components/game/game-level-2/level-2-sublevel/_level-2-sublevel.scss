@@ -1,0 +1,134 @@
+.level-2__words {
+  @include absolute-center;
+  @include flex;
+  @include size(100vw, 100vh);
+  background: url("./assets/img/stars.png") center center no-repeat,
+    linear-gradient(180deg, rgba(4, 31, 52, 1) 0%, rgba(2, 68, 102, 1) 100%);
+  background-size: cover;
+  z-index: 3;
+}
+
+.words__wrapper {
+  @include size(90vw, 90vh);
+  display: grid;
+  grid-template-areas: "sidebar center" "sidebar buttons";
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 1fr 50px;
+}
+
+.words__sidebar {
+  grid-area: sidebar;
+  position: relative;
+}
+
+.words__center {
+  @include flex(column, space-evenly);
+  color: #ff1e00;
+  flex-wrap: wrap;
+  font-family: "BloggerBold";
+  font-size: 3rem;
+  grid-area: center;
+  text-transform: uppercase;
+
+  .center__guess {
+    @include flex;
+  }
+
+  .guess__letter {
+    @include flex;
+    @include size(70px, 70px);
+    background: url("./assets/img/letter-star.png");
+    background-size: cover;
+    cursor: pointer;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+    padding-top: 8px;
+    text-shadow: 2px 1px rgba(0, 0, 0, 0.8);
+
+    &.disable {
+      pointer-events: none;
+    }
+
+    &.active {
+      filter: drop-shadow(0 0 7px #fff);
+    }
+  }
+
+  .center__letters {
+    @include flex;
+    @include size(100%, 55%);
+    padding: 10% 0;
+
+    .some__letter {
+      @include flex;
+      @include size(70px, 70px);
+      align-self: flex-start;
+      background-size: cover !important;
+      cursor: pointer;
+      filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+      text-shadow: 2px 1px rgba(0, 0, 0, 0.8);
+    }
+
+    .some__letter:nth-child(odd) {
+      align-self: flex-end;
+    }
+  }
+}
+
+.words__buttons {
+  grid-area: buttons;
+}
+
+.rocket {
+  &--words {
+    animation: rocket-flying-top 1s forwards;
+    top: 110%;
+
+    .SVGInline {
+      display: block;
+    }
+
+    svg {
+      @include size(20vw);
+    }
+
+    .rocket__img {
+      @include absolute-center;
+
+      img {
+        @include size(107%);
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+@keyframes rocket-flying-top {
+  from {
+    top: 110%;
+  }
+
+  to {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 1150px) {
+  .rocket {
+    &--words {
+      svg {
+        @include size(25vw);
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .rocket {
+    &--words {
+      svg {
+        @include size(27vw);
+      }
+    }
+  }
+}

@@ -4,33 +4,15 @@ import React, { Component } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import GameLevel1 from "./game-level-1";
+import GameLevel2 from "./game-level-2";
 import BackButton from "./back-button";
 
 export default class Game extends Component {
   gameLevels = [
     { name: "level-1", title: "Слоги", path: "/game/level-1" },
-    {
-      name: "level-2",
-      title: "Слова",
-      path: "/game/level-2",
-      subLevels: [
-        { name: "sub-level-21", title: "3 буквы" },
-        { name: "sub-level-22", title: "4 буквы" },
-        { name: "sub-level-23", title: "5 букв" },
-      ],
-    },
-    {
-      name: "level-3",
-      title: "Кроссворды",
-      path: "/game/level-3",
-      subLevels: [
-        { name: "sub-level-31", title: "3 буквы" },
-        { name: "sub-level-32", title: "4 буквы" },
-        { name: "sub-level-33", title: "5 букв" },
-      ],
-    },
+    { name: "level-2", title: "Слова", path: "/game/level-2" },
+    { name: "level-3", title: "Кроссворды", path: "/game/level-3" },
   ];
-
 
   render() {
     const levels = this.gameLevels.map(item => (
@@ -43,7 +25,9 @@ export default class Game extends Component {
       </Link>
     ));
 
-    const { gameLetters, onEndGame, rocketColor, soundVolume } = this.props;
+    const {
+      gameLetters, onEndGame, rocketColor, soundVolume, gameWords, numWords,
+    } = this.props;
 
     return (
       <div className="game">
@@ -62,6 +46,14 @@ export default class Game extends Component {
               soundVolume={soundVolume}
             />
           </Route>
+          <Route path="/game/level-2">
+            <GameLevel2
+              gameWords={gameWords}
+              numWords={numWords}
+              rocketColor={rocketColor}
+              soundVolume={soundVolume}
+            />
+          </Route>
         </Switch>
       </div>
     );
@@ -73,6 +65,8 @@ Game.propTypes = {
   onEndGame: PropTypes.func,
   rocketColor: PropTypes.string,
   soundVolume: PropTypes.number,
+  gameWords: PropTypes.arrayOf(PropTypes.object),
+  numWords: PropTypes.number,
 };
 
 Game.defaultProps = {
@@ -80,4 +74,6 @@ Game.defaultProps = {
   onEndGame: null,
   rocketColor: null,
   soundVolume: null,
+  gameWords: null,
+  numWords: null,
 };

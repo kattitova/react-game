@@ -2,11 +2,10 @@
 import React, { Component } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import SVGInline from "react-svg-inline";
-import starSVG from "../../../assets/img/star.svg";
 import BackButton from "../back-button";
 import Level1Sublevel from "./level-1-sublevel";
 import { lettersB } from "../../app/app";
+import GetStars from "../get-stars";
 
 export default class GameLevel1 extends Component {
   stars = [1, 2, 3];
@@ -28,9 +27,7 @@ export default class GameLevel1 extends Component {
       >
         <div className={`level-1__sub-level numStars-${this.getStars(item)}`} data-letter={`letter-${ind}`}>
           <span>{item}</span>
-          <div className="sub-level__stars">
-            {this.stars.map(star => <div key={`star-${star}`} className="sub-level__star"><SVGInline svg={starSVG} /></div>)}
-          </div>
+          <GetStars />
         </div>
       </Link>
     ))

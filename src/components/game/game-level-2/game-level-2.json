@@ -1,0 +1,82 @@
+[
+  {
+    "num": 3,
+    "mas": [
+      {
+        "word": "кот",
+        "template": ["к", "о", ""],
+        "some": ["т", "ц", "л", "з", "в", "б", "р"],
+        "img": "src/assets/img/words/cat.png"
+      },
+      {
+        "word": "дом",
+        "template": ["д", "о", ""],
+        "some": ["к", "м", "п", "с", "ф", "б", "н"],
+        "img": "src/assets/img/words/house.png"
+      },
+      {
+        "word": "сом",
+        "template": ["с", "о", ""],
+        "some": ["т", "м", "л", "с", "в", "б", "р"],
+        "img": "src/assets/img/words/cat.png"
+      },
+      {
+        "word": "душ",
+        "template": ["д", "у", ""],
+        "some": ["з", "н", "л", "с", "в", "б", "ш"],
+        "img": "src/assets/img/words/cat.png"
+      },
+      {
+        "word": "нос",
+        "template": ["н", "о", ""],
+        "some": ["ф", "к", "л", "с", "в", "б", "р"],
+        "img": "src/assets/img/words/nose.png"
+      },
+      {
+        "word": "лук",
+        "template": ["л", "у", ""],
+        "some": ["т", "м", "к", "ф", "ц", "б", "з"],
+        "img": "src/assets/img/words/onion.png"
+      },
+      {
+        "word": "рот",
+        "template": ["р", "о", ""],
+        "some": ["т", "п", "л", "з", "к", "б", "г"],
+        "img": "src/assets/img/words/mouth.png"
+      },
+      {
+        "word": "пёс",
+        "template": ["п", "ё", ""],
+        "some": ["в", "п", "л", "н", "с", "б", "г"],
+        "img": "src/assets/img/words/dog.png"
+      }
+    ]
+  },
+  {
+    "num": 4,
+    "mas": [
+      {
+        "word": "мама",
+        "template": ["м", "а", "", ""],
+        "some": ["в", "о", "л", "м", "е", "а", "г"],
+        "img": "src/assets/img/words/mother.png"
+      },
+      {
+        "word": "папа",
+        "template": ["п", "а", "", ""],
+        "some": ["п", "и", "к", "м", "е", "а", "г"],
+        "img": "src/assets/img/words/father.png"
+      },
+      {
+        "word": "ваза",
+        "template": ["в", "а", "", ""],
+        "some": ["ц", "з", "у", "м", "е", "а", "г"],
+        "img": "src/assets/img/words/father.png"
+      }
+    ]
+  },
+  {
+    "num": 5,
+    "mas": []
+  }
+]

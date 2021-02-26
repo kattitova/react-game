@@ -9,11 +9,12 @@ import Intro from "../intro";
 import Game from "../game";
 import Stats from "../intro/stats";
 import Settings from "../intro/settings";
-import PlaySound from "../play-sound";
 
 export const lettersA = ["а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"];
 
 export const lettersB = ["б", "в", "г", "д", "ж", "з", "к", "л", "м", "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш", "щ"];
+
+export const wordsRate = [3, 4, 5];
 
 export default class App extends Component {
   constructor() {
@@ -23,19 +24,13 @@ export default class App extends Component {
       introTextClass: "active",
       menuClass: "",
       gameLetters: this.getLettersLevelInitState(),
+      gameWords: this.getWordsLevelInitState(),
       rocketColor: "rocket-color--gray",
       soundVolume: 1,
       musicVolume: 0,
+      numWords: 3,
     };
-    this.musicRef = React.createRef();
   }
-
-  // componentDidMount() {
-  //   const { musicVolume } = this.state;
-  //   //this.musicRef.current.volume = 0.5;
-  //   document.querySelector(".musicVolume").volume = 0.5;
-  //   console.log(document.querySelector(".musicVolume"));
-  // }
 
   // listener click on Start Button to go to Main Menu from Intro
   onClickStartButton = () => {
@@ -100,6 +95,22 @@ export default class App extends Component {
     });
   }
 
+  // init Words Game state
+  getWordsLevelInitState = () => {
+    const arr = [];
+
+    wordsRate.forEach((item) => {
+      const obj = {
+        num: item,
+        correct: 0,
+        error: 0,
+        stars: 0,
+      };
+      arr.push(obj);
+    });
+    return arr;
+  }
+
   // get settings Rocket Color
   getRocketColor = (color) => {
     this.setState({ rocketColor: `rocket-color--${color}` });
@@ -110,24 +121,21 @@ export default class App extends Component {
     const volume = parseFloat(e.target.value, 10);
     this.setState({ [e.target.id]: volume });
     if (e.target.id === "musicVolume") {
-      // this.musicRef.current.muted = false;
       const music = document.querySelector(".musicVolume");
-      // this.musicRef.current.volume = volume;
       music.muted = false;
       music.volume = volume;
-      console.log(this.musicRef.current.muted);
     }
   }
 
   render() {
     const {
-      introClass, introTextClass, menuClass, gameLetters, rocketColor, soundVolume, musicVolume,
+      introClass, introTextClass, menuClass, gameLetters,
+      rocketColor, soundVolume, musicVolume, gameWords, numWords,
     } = this.state;
 
     return (
       <Router>
         <audio
-          ref={this.musicRef}
           className="musicVolume"
           autoPlay
           loop
@@ -153,6 +161,8 @@ export default class App extends Component {
                 onEndGame={this.onEndGame}
                 rocketColor={rocketColor}
                 soundVolume={soundVolume}
+                gameWords={gameWords}
+                numWords={numWords}
               />
             </Route>
             {/* statistic page */}
