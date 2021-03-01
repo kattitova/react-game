@@ -67,6 +67,11 @@
       cursor: pointer;
       filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
       text-shadow: 2px 1px rgba(0, 0, 0, 0.8);
+
+      &:hover,
+      &.hover {
+        filter: drop-shadow(0 0 5px #fff);
+      }
     }
 
     .some__letter:nth-child(odd) {
@@ -86,6 +91,10 @@
   font-family: "Blogger";
   font-size: 2rem;
   text-transform: none;
+
+  &:hover {
+    font-size: 2.2rem;
+  }
 }
 
 .next-word::after {
@@ -115,6 +124,10 @@
   filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
   font-size: 2.5rem;
   text-align: center;
+
+  &:hover {
+    font-size: 2.7rem;
+  }
 }
 
 .rocket {

@@ -28,7 +28,7 @@ export default class App extends Component {
       rocketColor: "rocket-color--gray",
       soundVolume: 1,
       musicVolume: 0,
-      numWords: 3,
+      numWords: 5,
     };
   }
 
@@ -111,6 +111,39 @@ export default class App extends Component {
     return arr;
   }
 
+  calcWordStars = (sumCorrect) => {
+    const { numWords } = this.state;
+    const h = Math.round(numWords / 3);
+    if (sumCorrect === 0) return 0;
+    if (sumCorrect <= h) return 1;
+    if (sumCorrect <= 2 * h) return 2;
+    return 3;
+  }
+
+  onEndWordsGame = (n, gameArr) => {
+    let sumCorrect = 0;
+    let sumError = 0;
+
+    gameArr.forEach((item) => {
+      sumCorrect += item.correct;
+      sumError += item.error;
+    });
+
+    const obj = {
+      num: n,
+      correct: sumCorrect,
+      error: sumError,
+      stars: this.calcWordStars(sumCorrect),
+    };
+
+    this.setState(({ gameWords }) => {
+      const newArr = gameWords.slice();
+      const ind = gameWords.findIndex(el => el.num === n);
+      newArr[ind] = obj;
+      return { gameWords: newArr };
+    });
+  }
+
   // get settings Rocket Color
   getRocketColor = (color) => {
     this.setState({ rocketColor: `rocket-color--${color}` });
@@ -125,6 +158,12 @@ export default class App extends Component {
       music.muted = false;
       music.volume = volume;
     }
+  }
+
+  // get changing word number
+  onChangeNumWords = (e) => {
+    const num = parseInt(e.target.value, 10);
+    this.setState({ numWords: num });
   }
 
   render() {
@@ -163,6 +202,7 @@ export default class App extends Component {
                 soundVolume={soundVolume}
                 gameWords={gameWords}
                 numWords={numWords}
+                onEndWordsGame={this.onEndWordsGame}
               />
             </Route>
             {/* statistic page */}
@@ -177,6 +217,8 @@ export default class App extends Component {
                 soundVolume={soundVolume}
                 musicVolume={musicVolume}
                 onChangeVolume={this.onChangeVolume}
+                numWords={numWords}
+                onChangeNumWords={this.onChangeNumWords}
               />
             </Route>
           </Switch>

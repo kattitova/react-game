@@ -12,7 +12,8 @@
 .prev-letter,
 .close-game,
 .next-word,
-.prev-word {
+.prev-word,
+.close-modal {
   @include flex;
   @include size(100px, 50px);
   background: url("./assets/img/button.png");
@@ -29,6 +30,10 @@
   &.disabled {
     opacity: 0.3;
     pointer-events: none;
+  }
+
+  &:hover {
+    font-size: 2.7rem;
   }
 }
 
@@ -48,8 +53,14 @@
   margin-left: 1rem;
 }
 
-.close-game {
+.close-game,
+.close-modal {
   font-size: 1.4rem;
+  transition: font-size 0.5s;
+
+  &:hover {
+    font-size: 1.5rem;
+  }
 }
 
 .planet__letterA {
@@ -69,6 +80,10 @@
 
   &.second {
     top: 55px;
+  }
+
+  &:hover {
+    font-size: 3.9vw;
   }
 }
 

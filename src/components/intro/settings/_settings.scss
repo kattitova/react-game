@@ -28,22 +28,31 @@ datalist {
   margin-top: 3px;
 }
 
-.settings__sound,
-.settings__music {
-  @include flex(column);
-  @include size(265px);
+.settings__sound--wrapper {
+  @include flex(row, space-around);
+  @include size(85%);
   border: 2px dashed #fff;
   border-radius: 1rem;
-  margin-bottom: 10px;
   padding: 5px 10px;
 }
 
-.settings__rocket-color {
+.settings__sound,
+.settings__music {
   @include flex(column);
-  @include size(265px);
+}
+
+.settings__game-time {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.settings__rocket-color,
+.settings__game-time {
+  @include flex(column);
+  @include size(85%);
   border: 2px dashed #fff;
   border-radius: 1rem;
-  padding: 15px 10px;
+  padding: 5px 10px;
 
   .rocket-color__palette {
     @include flex;

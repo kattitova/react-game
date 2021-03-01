@@ -26,7 +26,7 @@ export default class Game extends Component {
     ));
 
     const {
-      gameLetters, onEndGame, rocketColor, soundVolume, gameWords, numWords,
+      gameLetters, onEndGame, rocketColor, soundVolume, gameWords, numWords, onEndWordsGame,
     } = this.props;
 
     return (
@@ -52,6 +52,7 @@ export default class Game extends Component {
               numWords={numWords}
               rocketColor={rocketColor}
               soundVolume={soundVolume}
+              onEndWordsGame={onEndWordsGame}
             />
           </Route>
         </Switch>
@@ -67,6 +68,7 @@ Game.propTypes = {
   soundVolume: PropTypes.number,
   gameWords: PropTypes.arrayOf(PropTypes.object),
   numWords: PropTypes.number,
+  onEndWordsGame: PropTypes.func,
 };
 
 Game.defaultProps = {
@@ -76,4 +78,5 @@ Game.defaultProps = {
   soundVolume: null,
   gameWords: null,
   numWords: null,
+  onEndWordsGame: null,
 };

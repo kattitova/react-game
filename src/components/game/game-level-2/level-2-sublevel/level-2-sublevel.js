@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -9,8 +10,11 @@ import rocketSVG from "../../../../assets/img/rocket-words.svg";
 import wordsJSON from "../game-level-2.json";
 import { genPlanetImg } from "../../game-level-1/level-1-sublevel/level-1-sublevel";
 import PlaySound from "../../../play-sound";
+import ModalWindow from "./modal-window";
 
-export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
+export default function Level2Sublevel({
+  numWords, rocketColor, soundVolume, onEndWordsGame,
+}) {
   const location = useLocation();
   const num = location.propsWord;
   const words = wordsJSON.filter(el => el.num === num)[0];
@@ -30,10 +34,15 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
     for (let i = 0; i < numWords; i += 1) {
       gameArr.push(words.mas[startArr[i]]);
     }
+
+    gameArr.forEach((item) => {
+      item.correct = 0;
+      item.error = 0;
+    });
     return gameArr;
   };
 
-  const [gameArr] = useState(getWordsArray());
+  const [gameArr, setGameArr] = useState(() => getWordsArray());
   const [gameWord, setGameWord] = useState({ ind: 0, obj: gameArr[0] });
   const [rocketClass, setRocketClass] = useState("rocket rocket--words");
   const [guessState, setGuessState] = useState(gameWord.obj.template);
@@ -41,6 +50,9 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
   const [nextWordClass, setNextWordClass] = useState("next-word");
   const [prevWordClass, setPrevWordClass] = useState("prev-word disabled");
   const [autoPlay, setAutoPlay] = useState(false);
+  const [classModalWindow, setClassModalWindow] = useState("modal-window hidden");
+  const [sumCorrect, setSumCorrect] = useState(0);
+  const [sumError, setSumError] = useState(0);
 
   const getInitClassLetterState = () => {
     const arr = [];
@@ -64,7 +76,6 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
     const arr = [...guessState];
     arr[ind] = data;
     setGuessState(arr);
-    console.log(guessState);
   };
 
   // call functions with 0 volume for preload sounds
@@ -84,10 +95,16 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
   // check guess word correct or not
   const checkCorrectWord = () => {
     if (!guessState.includes("")) {
+      const cloneArr = gameArr.slice();
+      const ind = cloneArr.findIndex(el => el.word === gameWord.obj.word);
+
       if (gameWord.obj.word === guessState.join("")) {
         PlaySound("correct.mp3", 0, soundVolume);
         PlaySound(`${gameWord.obj.word}.mp3`, 0, soundVolume);
-        resetActiveClass();
+        setTimeout(() => { resetActiveClass(); }, 750);
+        cloneArr[ind].correct += 1;
+        setSumCorrect(sumCorrect + 1);
+        if (sumCorrect + 1 === numWords) setClassModalWindow("modal-window");
       } else {
         PlaySound("error.mp3", 0, soundVolume);
         const arr = [...guessState];
@@ -98,7 +115,10 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
           setGuessState(arr);
           resetActiveClass();
         }, 750);
+        cloneArr[ind].error += 1;
+        setSumError(sumError + 1);
       }
+      setGameArr(cloneArr);
     }
   };
 
@@ -188,8 +208,21 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
     setNextWordClass("next-word");
   };
 
+  const onCloseModal = () => {
+    setClassModalWindow("modal-window hidden");
+    onEndWordsGame(num, gameArr);
+  };
+
   return (
     <div className="level-2__words">
+      <div className={classModalWindow}>
+        <ModalWindow
+          sumCorrect={sumCorrect}
+          sumError={sumError}
+          numWords={numWords}
+          onCloseModal={() => onCloseModal()}
+        />
+      </div>
       <div className="words__wrapper">
         <div className="words__sidebar">
           {/* rocket */}
@@ -218,7 +251,7 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
           <Link
             className="close-game"
             to="/game/level-2"
-            // onClick={() => { onEndGame(count, letterB); }}
+            onClick={() => { onEndWordsGame(num, gameArr); }}
           >
               Закончить игру
           </Link>
@@ -282,10 +315,12 @@ Level2Sublevel.propTypes = {
   numWords: PropTypes.number,
   rocketColor: PropTypes.string,
   soundVolume: PropTypes.number,
+  onEndWordsGame: PropTypes.func,
 };
 
 Level2Sublevel.defaultProps = {
   numWords: null,
   rocketColor: null,
   soundVolume: null,
+  onEndWordsGame: null,
 };

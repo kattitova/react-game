@@ -32,7 +32,9 @@ export default class GameLevel2 extends Component {
   )))
 
   render() {
-    const { numWords, rocketColor, soundVolume } = this.props;
+    const {
+      numWords, rocketColor, soundVolume, onEndWordsGame,
+    } = this.props;
     return (
       <div className="game__level-2">
         <div className="game__button-container">
@@ -46,7 +48,7 @@ export default class GameLevel2 extends Component {
           <Route path="/game/level-2/words">
             <Level2Sublevel
               numWords={numWords}
-              // onEndGame={onEndGame}
+              onEndWordsGame={onEndWordsGame}
               rocketColor={rocketColor}
               soundVolume={soundVolume}
             />
@@ -62,6 +64,7 @@ GameLevel2.propTypes = {
   numWords: PropTypes.number,
   rocketColor: PropTypes.string,
   soundVolume: PropTypes.number,
+  onEndWordsGame: PropTypes.func,
 };
 
 GameLevel2.defaultProps = {
@@ -69,4 +72,5 @@ GameLevel2.defaultProps = {
   numWords: null,
   rocketColor: null,
   soundVolume: null,
+  onEndWordsGame: null,
 };

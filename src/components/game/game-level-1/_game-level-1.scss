@@ -29,5 +29,9 @@
     cursor: pointer;
     position: relative;
     text-transform: uppercase;
+
+    &:hover {
+      filter: drop-shadow(0 0 7px #fff);
+    }
   }
 }
