@@ -10,7 +10,9 @@
 
 .next-letter,
 .prev-letter,
-.close-game {
+.close-game,
+.next-word,
+.prev-word {
   @include flex;
   @include size(100px, 50px);
   background: url("./assets/img/button.png");
@@ -26,6 +28,7 @@
 
   &.disabled {
     opacity: 0.3;
+    pointer-events: none;
   }
 }
 

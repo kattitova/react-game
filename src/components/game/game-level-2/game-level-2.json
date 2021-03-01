@@ -18,13 +18,13 @@
         "word": "сом",
         "template": ["с", "о", ""],
         "some": ["т", "м", "л", "с", "в", "б", "р"],
-        "img": "src/assets/img/words/cat.png"
+        "img": "src/assets/img/words/som.png"
       },
       {
         "word": "душ",
         "template": ["д", "у", ""],
         "some": ["з", "н", "л", "с", "в", "б", "ш"],
-        "img": "src/assets/img/words/cat.png"
+        "img": "src/assets/img/words/shower.png"
       },
       {
         "word": "нос",
@@ -49,6 +49,18 @@
         "template": ["п", "ё", ""],
         "some": ["в", "п", "л", "н", "с", "б", "г"],
         "img": "src/assets/img/words/dog.png"
+      },
+      {
+        "word": "рак",
+        "template": ["р", "а", ""],
+        "some": ["о", "в", "и", "к", "ц", "ю", "ж"],
+        "img": "src/assets/img/words/lobster.png"
+      },
+      {
+        "word": "лев",
+        "template": ["л", "е", ""],
+        "some": ["ю", "в", "и", "а", "ч", "к", "ж"],
+        "img": "src/assets/img/words/lion.png"
       }
     ]
   },
@@ -71,12 +83,115 @@
         "word": "ваза",
         "template": ["в", "а", "", ""],
         "some": ["ц", "з", "у", "м", "е", "а", "г"],
-        "img": "src/assets/img/words/father.png"
+        "img": "src/assets/img/words/vase.png"
+      },
+      {
+        "word": "луна",
+        "template": ["л", "у", "", ""],
+        "some": ["о", "к", "н", "с", "е", "а", "ю"],
+        "img": "src/assets/img/words/moon.png"
+      },
+      {
+        "word": "слон",
+        "template": ["с", "л", "", ""],
+        "some": ["ы", "к", "о", "д", "ж", "н", "ю"],
+        "img": "src/assets/img/words/elephant.png"
+      },
+      {
+        "word": "лиса",
+        "template": ["л", "и", "", ""],
+        "some": ["ы", "с", "о", "д", "а", "н", "ю"],
+        "img": "src/assets/img/words/fox.png"
+      },
+      {
+        "word": "заяц",
+        "template": ["з", "а", "", ""],
+        "some": ["у", "ц", "к", "я", "м", "о", "ю"],
+        "img": "src/assets/img/words/hare.png"
+      },
+      {
+        "word": "волк",
+        "template": ["в", "о", "", ""],
+        "some": ["л", "ц", "к", "ы", "м", "о", "в"],
+        "img": "src/assets/img/words/wolf.png"
+      },
+      {
+        "word": "сова",
+        "template": ["с", "о", "", ""],
+        "some": ["л", "а", "к", "ы", "м", "о", "в"],
+        "img": "src/assets/img/words/owl.png"
+      },
+      {
+        "word": "окно",
+        "template": ["о", "к", "", ""],
+        "some": ["л", "о", "к", "н", "м", "а", "в"],
+        "img": "src/assets/img/words/window.png"
       }
     ]
   },
   {
     "num": 5,
-    "mas": []
+    "mas": [
+      {
+        "word": "лампа",
+        "template": ["л", "а", "", "", ""],
+        "some": ["к", "п", "л", "а", "с", "м", "ю"],
+        "img": "src/assets/img/words/lamp.png"
+      },
+      {
+        "word": "жираф",
+        "template": ["ж", "и", "", "", ""],
+        "some": ["н", "р", "ю", "а", "с", "ф", "в"],
+        "img": "src/assets/img/words/giraffe.png"
+      },
+      {
+        "word": "зебра",
+        "template": ["з", "е", "", "", ""],
+        "some": ["о", "б", "л", "а", "ц", "с", "р"],
+        "img": "src/assets/img/words/zebra.png"
+      },
+      {
+        "word": "белка",
+        "template": ["б", "е", "", "", ""],
+        "some": ["о", "б", "л", "а", "ц", "к", "р"],
+        "img": "src/assets/img/words/squirrel.png"
+      },
+      {
+        "word": "перец",
+        "template": ["п", "е", "", "", ""],
+        "some": ["и", "е", "л", "п", "ц", "к", "р"],
+        "img": "src/assets/img/words/peeper.png"
+      },
+      {
+        "word": "вилка",
+        "template": ["в", "и", "", "", ""],
+        "some": ["а", "е", "л", "п", "у", "к", "р"],
+        "img": "src/assets/img/words/fork.png"
+      },
+      {
+        "word": "ложка",
+        "template": ["л", "о", "", "", ""],
+        "some": ["й", "к", "р", "ч", "ж", "а", "м"],
+        "img": "src/assets/img/words/spoon.png"
+      },
+      {
+        "word": "хомяк",
+        "template": ["х", "о", "", "", ""],
+        "some": ["м", "к", "р", "я", "у", "а", "ж"],
+        "img": "src/assets/img/words/hamster.png"
+      },
+      {
+        "word": "индюк",
+        "template": ["и", "н", "", "", ""],
+        "some": ["у", "в", "ю", "я", "д", "а", "к"],
+        "img": "src/assets/img/words/turkey.png"
+      },
+      {
+        "word": "арбуз",
+        "template": ["а", "р", "", "", ""],
+        "some": ["с", "з", "р", "о", "у", "а", "б"],
+        "img": "src/assets/img/words/watermelon.png"
+      }
+    ]
   }
 ]

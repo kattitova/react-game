@@ -27,18 +27,20 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
     shuffle(startArr);
 
     const gameArr = [];
-
     for (let i = 0; i < numWords; i += 1) {
       gameArr.push(words.mas[startArr[i]]);
     }
     return gameArr;
   };
 
-  const gameArr = getWordsArray();
-  const [gameWord, setGameWord] = useState({ ind: 0, obj: gameArr[0] }); // use for slide next / prev word
+  const [gameArr] = useState(getWordsArray());
+  const [gameWord, setGameWord] = useState({ ind: 0, obj: gameArr[0] });
   const [rocketClass, setRocketClass] = useState("rocket rocket--words");
   const [guessState, setGuessState] = useState(gameWord.obj.template);
   const [activeInd, setActiveInd] = useState(null);
+  const [nextWordClass, setNextWordClass] = useState("next-word");
+  const [prevWordClass, setPrevWordClass] = useState("prev-word disabled");
+  const [autoPlay, setAutoPlay] = useState(false);
 
   const getInitClassLetterState = () => {
     const arr = [];
@@ -49,9 +51,8 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
   };
   const [activeLetter, setActiveLetter] = useState(getInitClassLetterState());
 
-  const onGuessLetterClick = (e) => {
-    const ind = parseInt(e.target.getAttribute("data-num"), 10);
-    const arr = [...activeLetter].map((item, i) => {
+  const onGuessLetterClick = (ind) => {
+    const arr = [...activeLetter].map((_item, i) => {
       if (i < 2) return "guess__letter disable";
       return i === ind ? "guess__letter active" : "guess__letter";
     });
@@ -59,28 +60,44 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
     setActiveInd(ind);
   };
 
-  const onSomeLetterClick = (e) => {
+  const onSomeLetterClick = (ind, data) => {
     const arr = [...guessState];
-    arr[activeInd] = e.target.getAttribute("data-letter");
+    arr[ind] = data;
     setGuessState(arr);
+    console.log(guessState);
   };
 
   // call functions with 0 volume for preload sounds
   PlaySound("correct.mp3", 0, 0);
   PlaySound("error.mp3", 0, 0);
 
+  // reset letters "active" class
+  const resetActiveClass = () => {
+    const classArr = [];
+    for (let i = 0; i < num; i += 1) {
+      classArr[i] = "guess__letter";
+    }
+    setActiveLetter(classArr);
+    setActiveInd(null);
+  };
+
   // check guess word correct or not
-  const checkCorrectWord = async () => {
+  const checkCorrectWord = () => {
     if (!guessState.includes("")) {
       if (gameWord.obj.word === guessState.join("")) {
         PlaySound("correct.mp3", 0, soundVolume);
+        PlaySound(`${gameWord.obj.word}.mp3`, 0, soundVolume);
+        resetActiveClass();
       } else {
-        await PlaySound("error.mp3", 0, soundVolume);
+        PlaySound("error.mp3", 0, soundVolume);
         const arr = [...guessState];
         for (let i = 2; i < num; i += 1) {
           arr[i] = "";
         }
-        setTimeout(() => { setGuessState(arr); }, 750);
+        setTimeout(() => {
+          setGuessState(arr);
+          resetActiveClass();
+        }, 750);
       }
     }
   };
@@ -100,7 +117,10 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
         key={`guess-letter-${ind}`}
         data-num={ind}
         className={activeLetter[ind]}
-        onClick={e => onGuessLetterClick(e)}
+        onClick={(e) => {
+          const indx = parseInt(e.target.getAttribute("data-num"), 10);
+          onGuessLetterClick(indx);
+        }}
       >
         {guessState[ind]}
       </div>
@@ -114,7 +134,7 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
     }
     return styleArr;
   };
-  const [imgPlanet, setImgPlanet] = useState(genInitImgPlanetState()); // use when slide next / prev word
+  const [imgPlanet, setImgPlanet] = useState(genInitImgPlanetState());
 
   // render some letters for select
   const renderSomeLetters = (mas, cls) => mas.map((letter, ind) => (
@@ -123,11 +143,50 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
       data-letter={letter}
       className={cls}
       style={imgPlanet[ind]}
-      onClick={e => onSomeLetterClick(e)}
+      onClick={(e) => {
+        const data = e.target.getAttribute("data-letter");
+        onSomeLetterClick(activeInd, data);
+      }}
     >
       {letter}
     </div>
   ));
+
+  // refresh word: set empty guess letters and reset letters "active" class
+  const refreshWord = () => {
+    const arr = [...guessState];
+    for (let i = 2; i < num; i += 1) {
+      arr[i] = "";
+    }
+    setGuessState(arr);
+    resetActiveClass();
+  };
+
+  // autoplay game
+  useEffect(() => {
+    if (autoPlay) {
+      if (activeInd < num) {
+        const resArr = gameWord.obj.word.split("");
+        onGuessLetterClick(activeInd);
+        onSomeLetterClick(activeInd, resArr[activeInd]);
+        setActiveInd(activeInd + 1);
+        setAutoPlay(false);
+      }
+    } else if (activeInd !== null && activeInd < num) {
+      setTimeout(() => { setAutoPlay(true); }, 1000);
+    }
+  }, [autoPlay]);
+
+  // change word by click on Next / Prev Button
+  const changeWord = (i) => {
+    setGameWord({ ind: gameWord.ind + i, obj: gameArr[gameWord.ind + i] });
+    setGuessState(gameArr[gameWord.ind + i].template);
+    setImgPlanet(genInitImgPlanetState());
+    setRocketClass("rocket rocket--words start");
+    setTimeout(() => { setRocketClass("rocket rocket--words"); }, 100);
+    setPrevWordClass("prev-word");
+    setNextWordClass("next-word");
+  };
 
   return (
     <div className="level-2__words">
@@ -163,6 +222,56 @@ export default function Level2Sublevel({ numWords, rocketColor, soundVolume }) {
           >
               Закончить игру
           </Link>
+
+          {/* button change on previuos word */}
+          <button
+            type="button"
+            className={prevWordClass}
+            onClick={() => {
+              changeWord(-1);
+              if (gameWord.ind < 2) setPrevWordClass(`${prevWordClass} disabled`);
+            }}
+          >
+            Назад
+          </button>
+
+          {/* button refresh word */}
+          <button
+            type="button"
+            className="refresh-word"
+            onClick={() => {
+              refreshWord();
+            }}
+          >
+            <i className="fas fa-sync-alt" />
+          </button>
+
+          {/* button change on next word */}
+          <button
+            type="button"
+            className={nextWordClass}
+            onClick={() => {
+              changeWord(1);
+              if (gameWord.ind > gameArr.length - 3) setNextWordClass(`${nextWordClass} disabled`);
+            }}
+          >
+            Далее
+          </button>
+
+          {/* button autoplay */}
+          <button
+            type="button"
+            className="autoplay-word"
+            onClick={() => {
+              refreshWord();
+              setTimeout(() => {
+                setActiveInd(2);
+                setAutoPlay(true);
+              }, 500);
+            }}
+          >
+            <i className="fas fa-gamepad" />
+          </button>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@
   display: grid;
   grid-template-areas: "sidebar center" "sidebar buttons";
   grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr 50px;
+  grid-template-rows: 1fr 80px;
 }
 
 .words__sidebar {
@@ -56,6 +56,7 @@
   .center__letters {
     @include flex;
     @include size(100%, 55%);
+    flex-wrap: wrap;
     padding: 10% 0;
 
     .some__letter {
@@ -74,14 +75,57 @@
   }
 }
 
-.words__buttons {
+.words__button {
+  @include flex;
+  flex-wrap: wrap;
   grid-area: buttons;
+}
+
+.next-word,
+.prev-word {
+  font-family: "Blogger";
+  font-size: 2rem;
+  text-transform: none;
+}
+
+.next-word::after {
+  content: "\f30b";
+  font-family: "Font Awesome 5 Free";
+  font-size: 3rem;
+  font-weight: 900;
+  margin-left: 0.5rem;
+}
+
+.prev-word::before {
+  content: "\f30a";
+  font-family: "Font Awesome 5 Free";
+  font-size: 3rem;
+  font-weight: 900;
+  margin-right: 0.5rem;
+}
+
+.refresh-word,
+.autoplay-word {
+  @include flex;
+  @include size(100px, 50px);
+  background: url("./assets/img/button.png");
+  background-size: cover;
+  border: 0;
+  color: #ff1e00;
+  filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+  font-size: 2.5rem;
+  text-align: center;
 }
 
 .rocket {
   &--words {
     animation: rocket-flying-top 1s forwards;
     top: 110%;
+
+    &.start {
+      animation: none !important;
+      top: 140%;
+    }
 
     .SVGInline {
       display: block;
@@ -130,5 +174,17 @@
         @include size(27vw);
       }
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .close-game {
+    order: 3;
+  }
+}
+
+@media (max-width: 540px) {
+  .words__center .guess__letter {
+    @include size(65px, 65px);
   }
 }

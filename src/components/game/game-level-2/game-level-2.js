@@ -25,7 +25,7 @@ export default class GameLevel2 extends Component {
         <GetStars />
         <div className="sub-level__title">
           <span>{word}</span>
-              буквы
+          {parseInt(word, 10) === 5 ? "букв" : "буквы"}
         </div>
       </div>
     </Link>
