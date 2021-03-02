@@ -3,25 +3,39 @@
 import React, { Component } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import SVGInline from "react-svg-inline";
+import rocketSVG from "../../assets/img/rocket-game.svg";
+import pointerSVG from "../../assets/img/level-pointer.svg";
 import GameLevel1 from "./game-level-1";
 import GameLevel2 from "./game-level-2";
 import BackButton from "./back-button";
 
 export default class Game extends Component {
   gameLevels = [
-    { name: "level-1", title: "Слоги", path: "/game/level-1" },
-    { name: "level-2", title: "Слова", path: "/game/level-2" },
+    {
+      name: "level-1", title: "Слоги", path: "/game/level-1", content: "Это тренировочная игра, в которой ты познакомишься со всеми звуками, путешествуя на ракете!",
+    },
+    {
+      name: "level-2", title: "Слова", path: "/game/level-2", content: "В этой игре ты будешь собирать звезды-буквы и узнаешь, как читать слова",
+    },
     // { name: "level-3", title: "Кроссворды", path: "/game/level-3" },
   ];
 
   render() {
-    const levels = this.gameLevels.map(item => (
+    const levels = this.gameLevels.map((item, ind) => (
       <Link
         key={item.name}
         className={`level-menu__item ${item.name}`}
         to={item.path}
       >
-        <span>{item.title}</span>
+        <div className="level-menu__item--text">
+          <div className="level-menu__item--title">{item.title}</div>
+          <div className="level-menu__item--content">{item.content}</div>
+        </div>
+        <div className={`level-menu__item--pointer ${item.name}`}>
+          <span className="pointer__name">{ind + 1}</span>
+          <SVGInline svg={pointerSVG} />
+        </div>
       </Link>
     ));
 
@@ -35,7 +49,13 @@ export default class Game extends Component {
           <BackButton buttonClass="button-container__back-menu" path="/" />
         </div>
         <div className="game__level-menu">
-          {levels}
+          {/* rocket */}
+          <div className={`rocket rocket-game ${rocketColor}`}>
+            <SVGInline svg={rocketSVG} />
+          </div>
+          <div className="level-menu__wrapper">
+            {levels}
+          </div>
         </div>
         <Switch>
           <Route path="/game/level-1">

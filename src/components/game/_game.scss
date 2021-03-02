@@ -10,12 +10,79 @@
   &__level-menu {
     @include absolute-center;
     @include flex(column);
-    @include size(100vw, 100vh);
+    @include size(675px, 430px);
+
+    .level-menu__wrapper {
+      z-index: 2;
+    }
 
     .level-menu__item {
+      @include flex;
       color: #fff;
       cursor: pointer;
       font-size: 3rem;
+      position: absolute;
+
+      &:hover {
+        .level-menu__item--pointer {
+          filter: drop-shadow(0 0 5px #fff);
+        }
+      }
+
+      &.level-1 {
+        left: 0%;
+        top: 34%;
+
+        .level-menu__item--text {
+          text-align: right;
+        }
+      }
+
+      &.level-2 {
+        bottom: -18%;
+        right: -7%;
+
+        .level-menu__item--text {
+          order: 2;
+        }
+      }
+
+      &--text {
+        @include size(175px);
+      }
+
+      &--pointer {
+        margin: 0 10px;
+        position: relative;
+
+        .pointer__name {
+          @include absolute-center;
+          display: inline-block;
+          font-family: "BloggerBold";
+          z-index: 3;
+        }
+
+        &.level-2 {
+          transform: rotate(180deg);
+
+          .pointer__name {
+            margin-top: -40px;
+            transform: translate(-50%, 50%) rotate(180deg);
+          }
+
+          #pointer-color {
+            fill: url("#purple");
+          }
+        }
+      }
+
+      &--title {
+        font-family: "BloggerBold";
+      }
+
+      &--content {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -70,5 +137,85 @@
     @include absolute-center;
     @include size(100vw, 100vh);
     z-index: 2;
+  }
+
+  .rocket-game {
+    svg {
+      @include size(100%, 100%);
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .game__level-menu {
+    .level-menu__item {
+      &.level-2 {
+        right: -1%;
+
+        .level-menu__item--text {
+          @include size(135px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 690px) {
+  .game__level-menu {
+    @include size(98vw, 54.7vh);
+
+    .level-menu__item {
+      &.level-1 {
+        left: 25%;
+        top: 31%;
+
+        .level-menu__item--text {
+          order: 2;
+          text-align: left;
+        }
+      }
+
+      &.level-2 {
+        bottom: -15vw;
+        right: 14%;
+
+        .level-menu__item--text {
+          order: 0;
+          text-align: right;
+        }
+      }
+
+      &--text {
+        width: 175px !important;
+      }
+
+      &--title {
+        font-size: 1.5rem;
+      }
+
+      &--content {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .game__level-menu {
+    .level-menu__item {
+      &.level-2 {
+        bottom: -13.5vw;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .game__level-menu {
+    .level-menu__item {
+      &.level-2 {
+        bottom: -12vw;
+      }
+    }
   }
 }
