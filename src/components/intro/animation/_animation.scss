@@ -1,5 +1,6 @@
 .intro__animation {
   @include size(100%, 100%);
+  position: absolute;
 }
 
 .stars-1 {

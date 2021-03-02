@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Animation from "./animation";
 import IntroText from "./intro-text";
 import Menu from "./menu";
+import Footer from "./footer";
 
 export default class Intro extends Component {
   render() {
@@ -16,6 +17,7 @@ export default class Intro extends Component {
           <IntroText textClass={introTextClass} onClickStartButton={onClickStartButton} />
           <Menu menuClass={menuClass} />
         </div>
+        <Footer />
       </div>
     );
   }
