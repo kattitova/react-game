@@ -35,3 +35,20 @@
     }
   }
 }
+
+@media (max-width: 665px) {
+  .game__level-1 {
+    .level-1__sub-levels-container {
+      grid-gap: 1.5rem;
+    }
+
+    .level-1__sub-level {
+      @include size(8.5rem, 8.5rem);
+    }
+
+    .sub-level__star svg {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+}

@@ -45,7 +45,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
     }
 
     const dx = flag === 2 ? -start.width / 4 : start.width / 4;
-    const dy = flag === 2 ? 10 : 0;
+    const dy = flag === 2 ? 5 : 0;
     const X1 = calcCoord(start.left, start.width) - (window.innerWidth - start.width) / 2;
     const Y1 = calcCoord(start.top, start.height) - (window.innerHeight - start.height) / 2;
     const X3 = calcCoord(end.left, end.width) - (window.innerWidth - start.width) / 2 + dx;
@@ -54,7 +54,6 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
     if (flag === 1) X2 = calcCenterCoord(X1, X3);
     else if (flag === 2) X2 = -window.innerWidth * 0.75;
     else X2 = window.innerWidth * 0.75;
-    // const X2 = flag === 1 ? calcCenterCoord(X1, X3) : -window.innerWidth * 0.75;
     return `M ${X1},${Y1} Q ${X2},${Y3} ${X3},${Y3}`;
   }
 

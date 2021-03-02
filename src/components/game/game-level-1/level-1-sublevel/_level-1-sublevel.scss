@@ -245,3 +245,13 @@
     offset-distance: 100%;
   }
 }
+
+@media (max-width: 720px) {
+  .level-1__letters {
+    @include flex(column);
+
+    .close-game {
+      order: 0;
+    }
+  }
+}

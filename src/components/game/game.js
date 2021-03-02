@@ -11,7 +11,7 @@ export default class Game extends Component {
   gameLevels = [
     { name: "level-1", title: "Слоги", path: "/game/level-1" },
     { name: "level-2", title: "Слова", path: "/game/level-2" },
-    { name: "level-3", title: "Кроссворды", path: "/game/level-3" },
+    // { name: "level-3", title: "Кроссворды", path: "/game/level-3" },
   ];
 
   render() {
