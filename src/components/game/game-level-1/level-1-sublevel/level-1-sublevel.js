@@ -1,7 +1,7 @@
 /* eslint-disable quote-props */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import SVGInline from "react-svg-inline";
@@ -9,6 +9,7 @@ import rocketSVG from "../../../../assets/img/rocket-letters.svg";
 import { lettersA } from "../../../app/app";
 import PlaySound from "../../../play-sound";
 import Planet from "./planet";
+import HotKeysPanel from "./hot-keys-panel";
 
 export function genPlanetImg() {
   const num = Math.floor(Math.random() * 6) + 1;
@@ -32,6 +33,34 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
   const [rocketStyle, setRocketStyle] = useState(null);
   const [planetStyle, setPlanetStyle] = useState(genPlanetImg());
   const rocketRef = useRef(null);
+
+  // refs for hot keys trigger click
+  const planetTopRef = useRef(null);
+  const planetBottomRef = useRef(null);
+  const endGameRef = useRef(null);
+  const prevLetterRef = useRef(null);
+  const nextLetterRef = useRef(null);
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "z": endGameRef.current.click(); break;
+        case "ArrowUp": planetTopRef.current.click(); break;
+        case "ArrowDown": planetBottomRef.current.click(); break;
+        case "ArrowLeft":
+          if (!prevLetterRef.current.classList.contains("disabled")) {
+            prevLetterRef.current.click();
+          }
+          break;
+        case "ArrowRight":
+          if (!nextLetterRef.current.classList.contains("disabled")) {
+            nextLetterRef.current.click();
+          }
+          break;
+        default: break;
+      }
+    });
+  }, []);
 
   // calc rocket flying path
   function calcArc(start, end, flag) {
@@ -103,6 +132,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
     <div className="level-1__letters">
       {/* bottom A letter */}
       <div
+        ref={planetBottomRef}
         className="planet__letterA first"
         onClick={(e) => { onLetterAClick(e); }}
       >
@@ -111,6 +141,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
 
       {/* top A letter */}
       <div
+        ref={planetTopRef}
         className="planet__letterA second"
         onClick={(e) => { onLetterAClick(e); }}
       >
@@ -132,6 +163,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
 
       {/* button change on previouse letter */}
       <button
+        ref={prevLetterRef}
         type="button"
         className={prevLetterClass}
         onClick={() => {
@@ -145,6 +177,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
 
       {/* button ending game and send state with sublevel results */}
       <Link
+        ref={endGameRef}
         className="close-game"
         to="/game/level-1"
         onClick={() => { onEndGame(count, letterB); }}
@@ -154,6 +187,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
 
       {/* button change on next letter */}
       <button
+        ref={nextLetterRef}
         type="button"
         className={nextLetterClass}
         onClick={() => {
@@ -164,6 +198,8 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
       >
         {lettersA[letterA.ind + 1]}
       </button>
+
+      <HotKeysPanel />
     </div>
   );
 }
