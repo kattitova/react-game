@@ -29,6 +29,7 @@ export default class App extends Component {
       soundVolume: 1,
       musicVolume: 0,
       numWords: 5,
+      gameStatus: "new",
     };
   }
 
@@ -91,8 +92,11 @@ export default class App extends Component {
       const newArr = gameLetters.slice();
       const ind = gameLetters.findIndex(el => el.symb === letterB);
       newArr[ind] = obj;
+      localStorage.setItem("gameLetters", JSON.stringify(newArr));
       return { gameLetters: newArr };
     });
+
+    this.setState({ gameStatus: "continue" });
   }
 
   // init Words Game state
@@ -140,8 +144,19 @@ export default class App extends Component {
       const newArr = gameWords.slice();
       const ind = gameWords.findIndex(el => el.num === n);
       newArr[ind] = obj;
+      localStorage.setItem("gameWords", JSON.stringify(newArr));
       return { gameWords: newArr };
     });
+
+    localStorage.setItem("gameWordsStats", JSON.stringify(gameArr));
+
+    this.setState({ gameStatus: "continue" });
+  }
+
+  onClickMenuButton = (item) => {
+    if (item === "new-game") {
+      this.setState({ gameStatus: "new" });
+    }
   }
 
   // get settings Rocket Color
@@ -168,7 +183,7 @@ export default class App extends Component {
 
   render() {
     const {
-      introClass, introTextClass, menuClass, gameLetters,
+      introClass, introTextClass, menuClass, gameLetters, gameStatus,
       rocketColor, soundVolume, musicVolume, gameWords, numWords,
     } = this.state;
 
@@ -191,6 +206,7 @@ export default class App extends Component {
                 introTextClass={introTextClass}
                 menuClass={menuClass}
                 onClickStartButton={this.onClickStartButton}
+                onClickMenuButton={this.onClickMenuButton}
               />
             </Route>
             {/* page with games */}
@@ -203,6 +219,7 @@ export default class App extends Component {
                 gameWords={gameWords}
                 numWords={numWords}
                 onEndWordsGame={this.onEndWordsGame}
+                gameStatus={gameStatus}
               />
             </Route>
             {/* statistic page */}

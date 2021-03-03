@@ -12,7 +12,7 @@
   &__wrapper {
     @include absolute-center;
     @include flex(column);
-    @include size(50vh, 45vh);
+    @include size(45vh, 45vh);
     background: url("./assets/img/intro-bg.png") no-repeat;
     border-radius: 15px;
     color: #fff;

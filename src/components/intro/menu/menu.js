@@ -13,14 +13,19 @@ export default class Menu extends Component {
   ];
 
   render() {
-    const { menuClass } = this.props;
+    const { menuClass, onClickMenuButton } = this.props;
     const setClass = `intro__menu ${menuClass}`;
 
     const menuItems = this.menuItemsData.map(item => (
       <Link
         key={item.name}
         className={item.name}
-        to={item.path}
+        // to={item.path}
+        to={{
+          pathname: item.path,
+          propsName: item.name,
+        }}
+        onClick={() => { onClickMenuButton(item.name); }}
       >
         <span>{item.title}</span>
       </Link>
@@ -36,8 +41,10 @@ export default class Menu extends Component {
 
 Menu.propTypes = {
   menuClass: PropTypes.string,
+  onClickMenuButton: PropTypes.func,
 };
 
 Menu.defaultProps = {
   menuClass: null,
+  onClickMenuButton: null,
 };
