@@ -36,7 +36,7 @@ export default function Game({
   }
 
   if (menuName === "new-game" && gameStatus === "new") {
-    if (localStorage.getItem("gameLetters") !== null || localStorage.getItem("gameWords") !== null) {
+    // if (localStorage.getItem("gameLetters") !== null || localStorage.getItem("gameWords") !== null) {
       // generate null state gameLetters
       const arr = [];
 
@@ -54,7 +54,7 @@ export default function Game({
         arr.push(obj);
       });
       propsGameLetters = arr;
-    }
+    // }
   }
   // -------------------
 

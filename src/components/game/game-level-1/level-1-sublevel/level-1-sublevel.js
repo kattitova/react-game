@@ -74,7 +74,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
     }
 
     const dx = flag === 2 ? -start.width / 4 : start.width / 4;
-    const dy = flag === 2 ? 5 : 0;
+    const dy = flag === 2 ? 10 : 0;
     const X1 = calcCoord(start.left, start.width) - (window.innerWidth - start.width) / 2;
     const Y1 = calcCoord(start.top, start.height) - (window.innerHeight - start.height) / 2;
     const X3 = calcCoord(end.left, end.width) - (window.innerWidth - start.width) / 2 + dx;

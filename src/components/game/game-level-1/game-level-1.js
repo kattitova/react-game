@@ -50,7 +50,7 @@ export default class GameLevel1 extends Component {
             <Level1Sublevel
               onEndGame={onEndGame}
               rocketColor={rocketColor}
-              soundVolume={soundVolume} 
+              soundVolume={soundVolume}
             />
           </Route>
         </Switch>
