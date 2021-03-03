@@ -16,14 +16,17 @@ export default function Level2Sublevel({
   numWords, rocketColor, soundVolume, onEndWordsGame,
 }) {
   const location = useLocation();
-  const num = location.propsWord;
-  const words = wordsJSON.filter(el => el.num === num)[0];
+  const num = location.propsWord === undefined ? localStorage.getItem("numLettersGameWords") : location.propsWord;
+  localStorage.setItem("numLettersGameWords", num);
 
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.5);
   };
 
   const getWordsArray = () => {
+    if (location.propsWord === undefined) return JSON.parse(localStorage.getItem("saveGameArr"));
+
+    const words = wordsJSON.filter(el => el.num === num)[0];
     const startArr = [];
     for (let i = 0; i < words.mas.length; i += 1) {
       startArr[i] = i;
@@ -39,10 +42,14 @@ export default function Level2Sublevel({
       item.correct = 0;
       item.error = 0;
     });
+
+    localStorage.setItem("saveGameArr", JSON.stringify(gameArr));
+
     return gameArr;
   };
 
   const [gameArr, setGameArr] = useState(() => getWordsArray());
+  const [saveGameArr, setSaveGameArr] = useState(gameArr);
   const [gameWord, setGameWord] = useState({ ind: 0, obj: gameArr[0] });
   const [rocketClass, setRocketClass] = useState("rocket rocket--words");
   const [guessState, setGuessState] = useState(gameWord.obj.template);
@@ -97,15 +104,22 @@ export default function Level2Sublevel({
     if (!guessState.includes("")) {
       const cloneArr = gameArr.slice();
       const ind = cloneArr.findIndex(el => el.word === gameWord.obj.word);
+      const saveArr = saveGameArr.slice();
 
+      // if word guesses correct increment correct answers
       if (gameWord.obj.word === guessState.join("")) {
         PlaySound("correct.mp3", 0, soundVolume);
         PlaySound(`${gameWord.obj.word}.mp3`, 0, soundVolume);
         setTimeout(() => { resetActiveClass(); }, 750);
         cloneArr[ind].correct += 1;
         setSumCorrect(sumCorrect + 1);
+
+        saveArr[ind].template = saveArr[ind].word.split("");
+
+        // if guess all words -> show game end modal window
         if (sumCorrect + 1 === numWords) setClassModalWindow("modal-window");
       } else {
+        // if word guesses incorrect increment error answers
         PlaySound("error.mp3", 0, soundVolume);
         const arr = [...guessState];
         for (let i = 2; i < num; i += 1) {
@@ -119,6 +133,8 @@ export default function Level2Sublevel({
         setSumError(sumError + 1);
       }
       setGameArr(cloneArr);
+      setSaveGameArr(saveArr);
+      localStorage.setItem("saveGameArr", JSON.stringify(saveArr));
     }
   };
 
@@ -180,6 +196,7 @@ export default function Level2Sublevel({
     }
     setGuessState(arr);
     resetActiveClass();
+    console.log(arr);
   };
 
   // autoplay game
@@ -269,7 +286,7 @@ export default function Level2Sublevel({
           </button>
 
           {/* button refresh word */}
-          <button
+          {/* <button
             type="button"
             className="refresh-word"
             onClick={() => {
@@ -277,7 +294,7 @@ export default function Level2Sublevel({
             }}
           >
             <i className="fas fa-sync-alt" />
-          </button>
+          </button> */}
 
           {/* button change on next word */}
           <button

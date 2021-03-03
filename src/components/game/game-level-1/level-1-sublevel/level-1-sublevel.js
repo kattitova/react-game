@@ -21,7 +21,8 @@ export function genPlanetImg() {
 
 export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) {
   const location = useLocation();
-  const letterB = location.propsLetter;
+  const letterB = location.propsLetter === undefined ? localStorage.getItem("letterB") : location.propsLetter;
+  localStorage.setItem("letterB", letterB);
   const wideLettersB = ["ж", "м", "ф", "ш", "щ"];
   const [letterA, setLetterA] = useState({ ind: 0, symb: lettersA[0] });
   const [nextLetterClass, setNextClass] = useState("next-letter");

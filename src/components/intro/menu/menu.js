@@ -8,8 +8,8 @@ export default class Menu extends Component {
     { name: "continue-game", title: "Продолжить", path: "/game" },
     { name: "settings", title: "Настройки", path: "/settings" },
     { name: "stats", title: "Статистика", path: "/stats" },
-    { name: "score", title: "Топ игр", path: "/score" },
-    { name: "info", title: "Об игре", path: "/info" },
+    // { name: "score", title: "Топ игр", path: "/score" },
+    // { name: "info", title: "Об игре", path: "/info" },
   ];
 
   render() {

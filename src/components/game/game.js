@@ -11,11 +11,10 @@ import pointerSVG from "../../assets/img/level-pointer.svg";
 import GameLevel1 from "./game-level-1";
 import GameLevel2 from "./game-level-2";
 import BackButton from "./back-button";
-import { lettersA, lettersB } from "../app/app";
 
 export default function Game({
   gameLetters, onEndGame, rocketColor, soundVolume,
-  gameWords, numWords, onEndWordsGame, gameStatus,
+  gameWords, numWords, onEndWordsGame,
 }) {
   // play New game or Continue game
   const location = useLocation();
@@ -34,29 +33,6 @@ export default function Game({
   if (localStorage.getItem("gameWords") !== null) {
     if (menuName === "continue-game") propsGameWords = JSON.parse(localStorage.getItem("gameWords"));
   }
-
-  if (menuName === "new-game" && gameStatus === "new") {
-    // if (localStorage.getItem("gameLetters") !== null || localStorage.getItem("gameWords") !== null) {
-      // generate null state gameLetters
-      const arr = [];
-
-      const countObj = {};
-      lettersA.forEach((letterA) => {
-        countObj[`${letterA}`] = 0;
-      });
-
-      lettersB.forEach((letterB) => {
-        const obj = {
-          symb: letterB,
-          count: countObj,
-          stars: 0,
-        };
-        arr.push(obj);
-      });
-      propsGameLetters = arr;
-    // }
-  }
-  // -------------------
 
   const gameLevels = [
     {
@@ -131,7 +107,6 @@ Game.propTypes = {
   gameWords: PropTypes.arrayOf(PropTypes.object),
   numWords: PropTypes.number,
   onEndWordsGame: PropTypes.func,
-  gameStatus: PropTypes.string,
 };
 
 Game.defaultProps = {
@@ -142,5 +117,4 @@ Game.defaultProps = {
   gameWords: null,
   numWords: null,
   onEndWordsGame: null,
-  gameStatus: null,
 };

@@ -9,6 +9,12 @@
   z-index: 3;
 }
 
+.stats__table {
+  @include size(96vw);
+  display: flex;
+  justify-content: space-around;
+}
+
 .table__letters {
   align-items: center;
   background: rgb(143, 180, 248);
@@ -30,5 +36,46 @@
   &--title {
     color: rgba(4, 31, 52, 1);
     font-family: "BloggerBold";
+  }
+}
+
+.table__words {
+  align-items: center;
+  background: rgb(143, 180, 248);
+  border-radius: 1rem;
+  color: #fff;
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  padding: 1rem;
+  text-transform: uppercase;
+
+  &--game-title {
+    color: #ff1e00;
+    font-family: "BloggerBold";
+    grid-column: 1 / span 6;
+  }
+
+  &--title {
+    color: rgba(4, 31, 52, 1);
+    font-family: "BloggerBold";
+  }
+}
+
+@media (max-width: 910px) {
+  .game__stats {
+    align-items: flex-start;
+    overflow: auto;
+    padding: 20px 0;
+  }
+
+  .stats__table {
+    flex-direction: column;
+    width: auto;
+  }
+
+  .table__letters {
+    margin-bottom: 10px;
   }
 }

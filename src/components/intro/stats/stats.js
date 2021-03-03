@@ -19,6 +19,23 @@ export default class Stats extends Component {
     }));
   }
 
+  // generate Words Game Stats Table titles
+  getWordsGameDataTitle = () => {
+    const arrTitles = ["Слово", "Угадано", "Ошибок", "Слово", "Угадано", "Ошибок"];
+    return arrTitles.map((i, ind) => (
+      <div key={`stats-word-${ind}`} className="table__words--title">{i}</div>
+    ));
+  }
+
+  // generate Words Game Stats Table data
+  getWordsGameData = () => {
+    const { gameWords } = this.props;
+    return gameWords.map(i => Object.keys(i).map((val, ind) => {
+      if (val !== "word" && val !== "correct" && val !== "error") return;
+      return (<div key={`${val}-${ind}`}>{i[val]}</div>);
+    }));
+  }
+
   render() {
     return (
       <div className="game__stats">
@@ -32,6 +49,13 @@ export default class Stats extends Component {
             { this.getLettersGameDataTitle() }
             { this.getLettersGameData() }
           </div>
+
+          <div className="table__words">
+            <div className="table__words--game-title">Игра Слова</div>
+            {/* <div className="table__words--title">Буква</div> */}
+            { this.getWordsGameDataTitle() }
+            { this.getWordsGameData() }
+          </div>
         </div>
       </div>
     );
@@ -40,8 +64,10 @@ export default class Stats extends Component {
 
 Stats.propTypes = {
   gameLetters: PropTypes.arrayOf(PropTypes.object),
+  gameWords: PropTypes.arrayOf(PropTypes.object),
 };
 
 Stats.defaultProps = {
   gameLetters: null,
+  gameWords: null,
 };
