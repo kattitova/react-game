@@ -35,6 +35,7 @@ export default class App extends Component {
       numWords: 5,
       gameStatus: "new",
     };
+    this.audioRef = React.createRef();
   }
 
   // listener click on Start Button to go to Main Menu from Intro
@@ -261,6 +262,7 @@ export default class App extends Component {
     return (
       <Router>
         <audio
+          ref={this.audioRef}
           className="musicVolume"
           autoPlay
           loop
