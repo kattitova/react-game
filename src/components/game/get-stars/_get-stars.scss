@@ -1,0 +1,50 @@
+.sub-level__star {
+  svg {
+    @include size(3rem, 3rem);
+  }
+
+  path {
+    fill: rgba(255, 255, 255, 0.8);
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+}
+
+.numStars-1 {
+  .sub-level__star:first-child {
+    path {
+      fill: url("#star-fill");
+      stroke: #ff772c;
+    }
+  }
+}
+
+.numStars-2 {
+  .sub-level__star:not(:last-child) {
+    path {
+      fill: url("#star-fill");
+      stroke: #ff772c;
+    }
+  }
+}
+
+.numStars-3 {
+  .sub-level__star {
+    path {
+      fill: url("#star-fill");
+      stroke: #ff772c;
+    }
+  }
+}
+
+.sub-level__stars {
+  @include flex;
+  bottom: -2rem;
+  position: absolute;
+}
+
+.sub-level__star {
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}

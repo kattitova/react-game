@@ -1,0 +1,60 @@
+.modal-window {
+  @include absolute-center;
+  @include size(100vw, 100vh);
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+
+  &__wrapper {
+    @include absolute-center;
+    @include flex(column, space-around);
+    @include size(50vh, 45vh);
+    background: url("./assets/img/intro-bg.png") no-repeat;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 2.3rem;
+    font-weight: 400;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 9;
+
+    span {
+      color: #ffd000;
+      display: inline-block;
+      font-family: "BloggerBold";
+      margin: 0 5px;
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+
+  &__stars {
+    @include size(100%);
+    position: relative;
+
+    .sub-level__stars {
+      left: 50%;
+      transform: translateX(-50%);
+
+      .sub-level__star {
+        svg {
+          @include size(40px, 40px);
+        }
+      }
+
+      .sub-level__star:nth-child(2n) {
+        svg {
+          @include size(55px, 55px);
+        }
+      }
+    }
+  }
+
+  &__info {
+    div {
+      margin-bottom: 8px;
+    }
+  }
+}

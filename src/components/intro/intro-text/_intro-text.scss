@@ -1,0 +1,30 @@
+.intro__text {
+  display: none;
+
+  &.active {
+    @include flex(column);
+  }
+
+  &--string {
+    display: inline-block;
+    margin-bottom: 2vh;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  &--button {
+    @include size(116px, 58px);
+    background: url("./assets/img/button.png");
+    border: 0;
+    color: #ff1e00;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 4vh;
+    outline: none;
+    transition: font-size 0.5s;
+
+    &:hover {
+      font-size: 2.5rem;
+    }
+  }
+}

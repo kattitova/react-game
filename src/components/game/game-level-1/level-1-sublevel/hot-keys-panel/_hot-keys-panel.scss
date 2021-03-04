@@ -1,0 +1,32 @@
+.hotkeys-panel {
+  @include flex(column, space-around, flex-start);
+  @include size(165px, 220px);
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  color: #fff;
+  filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+  font-size: 1.5rem;
+  left: -5px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-top: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &__title {
+    font-family: "BloggerBold";
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  i {
+    @include size(10px);
+    color: #ff1e00;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}

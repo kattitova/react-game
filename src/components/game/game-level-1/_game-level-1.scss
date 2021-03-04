@@ -1,0 +1,54 @@
+.game__level-1 {
+  @include flex;
+  @include size(100vw, 100vh);
+  background: url("./assets/img/stars.png") center center no-repeat,
+    linear-gradient(180deg, rgba(4, 31, 52, 1) 0%, rgba(2, 68, 102, 1) 100%);
+  background-size: cover;
+
+  .level-1__sub-levels-container {
+    @include size(auto, 80vh);
+    align-items: center;
+    display: grid;
+    font-family: "BloggerBold";
+    font-size: 3.5rem;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+
+    a {
+      color: #fff !important;
+    }
+  }
+
+  .level-1__sub-level {
+    @include flex;
+    @include size(11rem, 11rem);
+    background: url("./assets/img/sub-level-bg.png") no-repeat;
+    background-size: cover;
+    border-radius: 1rem;
+    cursor: pointer;
+    position: relative;
+    text-transform: uppercase;
+
+    &:hover {
+      filter: drop-shadow(0 0 7px #fff);
+    }
+  }
+}
+
+@media (max-width: 665px) {
+  .game__level-1 {
+    .level-1__sub-levels-container {
+      grid-gap: 1.5rem;
+    }
+
+    .level-1__sub-level {
+      @include size(8.5rem, 8.5rem);
+    }
+
+    .sub-level__star svg {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+}
