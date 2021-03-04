@@ -1,6 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlMinimizerPlugin = require("html-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -25,18 +29,19 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
+        test: /\.scss$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: "",
+          },
+        },
+        { loader: "css-loader" },
+        { loader: "sass-loader" },
         ],
       },
       {
@@ -80,6 +85,9 @@ module.exports = {
       template: path.resolve(__dirname, "./src/index.html"),
       filename: "index.html",
     }),
+    new MiniCssExtractPlugin({
+      filename: "style.css",
+    }),
     new CopyPlugin({
       patterns: [
         {
@@ -89,4 +97,18 @@ module.exports = {
       ],
     }),
   ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+      new HtmlMinimizerPlugin(),
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
