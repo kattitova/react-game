@@ -240,9 +240,10 @@ export default class App extends Component {
     const volume = parseFloat(e.target.value, 10);
     this.setState({ [e.target.id]: volume });
     if (e.target.id === "musicVolume") {
-      const music = document.querySelector(".musicVolume");
-      music.muted = false;
-      music.volume = volume;
+      this.audioRef.current.src = "./src/assets/sounds/bg-audio.mp3";
+      this.audioRef.current.load();
+      this.audioRef.current.play();
+      this.audioRef.current.volume = volume;
     }
   }
 
@@ -266,10 +267,7 @@ export default class App extends Component {
           className="musicVolume"
           autoPlay
           loop
-          muted
-        >
-          <source src="./src/assets/sounds/bg-audio.mp3" />
-        </audio>
+        />
         <div className="game-container">
           <Switch>
             {/* first page with intro and menu */}
