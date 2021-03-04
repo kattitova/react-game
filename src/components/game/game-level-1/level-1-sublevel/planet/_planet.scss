@@ -1,0 +1,14 @@
+.planet {
+  @include size(7vw, 7vw);
+  background-size: cover !important;
+  filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+  position: absolute;
+
+  &--top {
+    top: 39px;
+  }
+
+  &--bottom {
+    bottom: 39px;
+  }
+}

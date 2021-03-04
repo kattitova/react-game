@@ -1,0 +1,257 @@
+.level-1__letters {
+  @include absolute-center;
+  @include flex;
+  @include size(100vw, 100vh);
+  background: url("./assets/img/stars.png") center center no-repeat,
+    linear-gradient(180deg, rgba(4, 31, 52, 1) 0%, rgba(2, 68, 102, 1) 100%);
+  background-size: cover;
+  z-index: 3;
+}
+
+.next-letter,
+.prev-letter,
+.close-game,
+.next-word,
+.prev-word,
+.close-modal {
+  @include flex;
+  @include size(100px, 50px);
+  background: url("./assets/img/button.png");
+  background-size: cover;
+  border: 0;
+  color: #ff1e00;
+  filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+  font-family: "BloggerBold";
+  font-size: 2.5rem;
+  padding-top: 5px;
+  text-align: center;
+  text-transform: uppercase;
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  &:hover {
+    font-size: 2.7rem;
+  }
+}
+
+.next-letter::before {
+  content: "\f30b";
+  font-family: "Font Awesome 5 Free";
+  font-size: 3rem;
+  font-weight: 900;
+  margin-right: 1rem;
+}
+
+.prev-letter::after {
+  content: "\f30a";
+  font-family: "Font Awesome 5 Free";
+  font-size: 3rem;
+  font-weight: 900;
+  margin-left: 1rem;
+}
+
+.close-game,
+.close-modal {
+  font-size: 1.4rem;
+  transition: font-size 0.5s;
+
+  &:hover {
+    font-size: 1.5rem;
+  }
+}
+
+.planet__letterA {
+  color: #ff1e00;
+  cursor: pointer;
+  font-family: "BloggerBold";
+  font-size: 3.8vw;
+  left: 50%;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  &.first {
+    bottom: 50px;
+  }
+
+  &.second {
+    top: 55px;
+  }
+
+  &:hover {
+    font-size: 3.9vw;
+  }
+}
+
+.rocket {
+  position: absolute;
+  z-index: 1;
+
+  svg {
+    @include size(26.7vw);
+
+    #rocket-shadow {
+      mix-blend-mode: multiply;
+    }
+
+    #rocket-inner-flame {
+      animation: innerFlame 1s infinite linear;
+    }
+
+    #rocket-outer-flame {
+      animation: outerFlame 1s infinite linear;
+    }
+  }
+
+  &.start {
+    offset-path: none !important;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__letterB {
+    color: #000;
+    font-family: "BloggerBold";
+    font-size: 3.8vw;
+    left: 40%;
+    position: absolute;
+    text-transform: uppercase;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.wide {
+      left: 39%;
+    }
+  }
+
+  &.on-first-letter {
+    animation: rocket-on-first-letter 1.5s linear forwards;
+    offset-distance: 0%;
+    offset-rotate: reverse;
+  }
+
+  &.on-second-letter {
+    animation: rocket-on-second-letter 2.5s linear forwards;
+    offset-distance: 0%;
+    offset-rotate: reverse;
+
+    .rocket__letterB {
+      top: 28%;
+      transform: rotate(180deg);
+    }
+  }
+
+  &.rocket-color {
+    &--prp {
+      #rocket-body {
+        fill: rgb(145, 1, 145);
+      }
+    }
+
+    &--grn {
+      #rocket-body {
+        fill: rgb(8, 197, 1);
+      }
+    }
+
+    &--red {
+      #rocket-body {
+        fill: rgb(235, 5, 5);
+      }
+    }
+
+    &--blue {
+      #rocket-body {
+        fill: rgb(20, 143, 243);
+      }
+    }
+
+    &--yel {
+      #rocket-body {
+        fill: rgb(255, 238, 0);
+      }
+    }
+
+    &--gray {
+      #rocket-body {
+        fill: #b5c5c6;
+      }
+    }
+  }
+}
+
+@keyframes outerFlame {
+  0% {
+    fill: rgb(255, 0, 0);
+  }
+
+  33% {
+    fill: rgb(255, 165, 0);
+  }
+
+  66% {
+    fill: rgb(255, 255, 0);
+  }
+
+  75% {
+    fill: rgb(255, 165, 0);
+  }
+
+  100% {
+    fill: rgb(255, 0, 0);
+  }
+}
+
+@keyframes innerFlame {
+  0% {
+    fill: rgb(255, 165, 0);
+  }
+
+  33% {
+    fill: rgb(255, 255, 0);
+  }
+
+  66% {
+    fill: rgb(255, 165, 0);
+  }
+
+  100% {
+    fill: rgb(255, 0, 0);
+  }
+}
+
+@keyframes rocket-on-first-letter {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes rocket-on-second-letter {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .level-1__letters {
+    @include flex(column);
+
+    .close-game {
+      order: 0;
+    }
+  }
+}

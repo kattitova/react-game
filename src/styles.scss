@@ -1,0 +1,80 @@
+@import "./components/abstracts/mixins";
+@import "./components/intro/intro";
+@import "./components/intro/animation/animation";
+@import "./components/intro/intro-text/intro-text";
+@import "./components/intro/menu/menu";
+@import "./components/intro/footer/footer";
+@import "./components/game/game";
+@import "./components/game/get-stars/get-stars";
+@import "./components/game/game-level-1/game-level-1";
+@import "./components/game/game-level-1/level-1-sublevel/level-1-sublevel";
+@import "./components/game/game-level-1/level-1-sublevel/planet/planet";
+@import "./components/game/game-level-1/level-1-sublevel/hot-keys-panel/hot-keys-panel";
+@import "./components/game/game-level-2/game-level-2";
+@import "./components/game/game-level-2/level-2-sublevel/level-2-sublevel";
+@import "./components/game/game-level-2/level-2-sublevel/modal-window/modal-window";
+@import "./components/intro/stats/stats";
+@import "./components/intro/settings/settings";
+@import "./components/intro/settings/input-range/input-range";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+@font-face {
+  font-family: Blogger;
+  src: url("./assets/fonts/BloggerSans.ttf");
+}
+
+@font-face {
+  font-family: BloggerBold;
+  src: url("./assets/fonts/BloggerSansBold.ttf");
+}
+
+#loader {
+  @include absolute-center;
+  @include flex;
+  @include size(100vw, 100vh);
+  animation: hide-loader 1s forwards;
+  animation-delay: 3s;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 31, 52, 1) 0%,
+    rgba(2, 68, 102, 1) 100%
+  );
+  pointer-events: none;
+  z-index: 11;
+}
+
+@keyframes hide-loader {
+  100% {
+    opacity: 0;
+  }
+}
+
+#root {
+  @include size(100vw, 100vh);
+  font-family: "Blogger";
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+button {
+  cursor: pointer;
+  font-family: "Blogger";
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hidden {
+  display: none !important;
+}
