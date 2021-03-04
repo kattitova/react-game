@@ -9,7 +9,7 @@ export default function Footer() {
       </div>
       <div>
         <a className="rs-link" href="https://rs.school/react/" target="blank">
-        <img src="/src/assets/img/rs-logo.png" />
+          <img src="./src/assets/img/rs-logo.png" />
         RS School React
         </a>
       </div>

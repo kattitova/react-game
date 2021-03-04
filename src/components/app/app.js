@@ -266,7 +266,7 @@ export default class App extends Component {
           loop
           muted
         >
-          <source src="/src/assets/sounds/bg-audio.mp3" />
+          <source src="./src/assets/sounds/bg-audio.mp3" />
         </audio>
         <div className="game-container">
           <Switch>

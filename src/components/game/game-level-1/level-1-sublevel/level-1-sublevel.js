@@ -14,7 +14,7 @@ import HotKeysPanel from "./hot-keys-panel";
 export function genPlanetImg() {
   const num = Math.floor(Math.random() * 6) + 1;
   const style = {
-    background: `url("/src/assets/img/planets/${num}.png")`,
+    background: `url("./src/assets/img/planets/${num}.png")`,
   };
   return style;
 }

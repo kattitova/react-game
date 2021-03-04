@@ -20,6 +20,7 @@ export default class GameLevel2 extends Component {
         pathname: "/game/level-2/words",
         propsWord: word,
       }}
+      onClick={() => { localStorage.removeItem("saveGameArr"); }}
     >
       <div className={`level-2__sub-level numStars-${this.getStars(word)}`}>
         <GetStars />
