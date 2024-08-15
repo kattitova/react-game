@@ -323,7 +323,7 @@
   transform: rotate(180deg);
 }
 .game__level-menu .level-menu__item--pointer.level-2 .pointer__name {
-  top: 0;
+  margin-top: -55px;
   transform: translate(-50%, 50%) rotate(180deg);
 }
 .game__level-menu .level-menu__item--pointer.level-2 #pointer-color {
@@ -689,8 +689,8 @@
   offset-rotate: reverse;
 }
 .rocket.on-second-letter .rocket__letterB {
-  top: 10%;
-  transform: rotate(180deg) translateY(-50%);
+  top: 21%;
+  transform: rotate(180deg);
 }
 .rocket.rocket-color--prp #rocket-body {
   fill: rgb(145, 1, 145);
