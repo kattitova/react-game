@@ -3,6 +3,8 @@
   background-size: cover !important;
   filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
   position: absolute;
+  display: flex;
+    align-items: center;
 
   &--top {
     top: 39px;

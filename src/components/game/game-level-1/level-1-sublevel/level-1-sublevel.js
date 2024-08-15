@@ -131,23 +131,7 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
 
   return (
     <div className="level-1__letters">
-      {/* bottom A letter */}
-      <div
-        ref={planetBottomRef}
-        className="planet__letterA first"
-        onClick={(e) => { onLetterAClick(e); }}
-      >
-        {letterA.symb}
-      </div>
-
-      {/* top A letter */}
-      <div
-        ref={planetTopRef}
-        className="planet__letterA second"
-        onClick={(e) => { onLetterAClick(e); }}
-      >
-        {letterA.symb}
-      </div>
+      
 
       {/* rocket */}
       <div className={`${rocketClass} ${rocketColor}`} style={rocketStyle} ref={rocketRef}>
@@ -159,8 +143,26 @@ export default function Level1Sublevel({ onEndGame, rocketColor, soundVolume }) 
         <SVGInline svg={rocketSVG} />
       </div>
 
-      <Planet planetClass="planet planet--top" planetStyle={planetStyle} />
-      <Planet planetClass="planet planet--bottom" planetStyle={planetStyle} />
+      <Planet planetClass="planet planet--top" planetStyle={planetStyle}>
+        {/* top A letter */}
+        <div
+          ref={planetTopRef}
+          className="planet__letterA second"
+          onClick={(e) => { onLetterAClick(e); }}
+        >
+          {letterA.symb}
+        </div>
+      </Planet>
+      <Planet planetClass="planet planet--bottom" planetStyle={planetStyle}>
+        {/* bottom A letter */}
+        <div
+          ref={planetBottomRef}
+          className="planet__letterA first"
+          onClick={(e) => { onLetterAClick(e); }}
+        >
+          {letterA.symb}
+        </div>
+      </Planet>
 
       {/* button change on previouse letter */}
       <button

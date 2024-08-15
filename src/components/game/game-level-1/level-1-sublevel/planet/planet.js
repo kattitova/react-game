@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Planet({ planetClass, planetStyle }) {
+export default function Planet({ planetClass, planetStyle, children }) {
   return (
-    <div className={planetClass} style={planetStyle} />
+    <div className={planetClass} style={planetStyle}>
+      {children}
+    </div>
   );
 }
 
