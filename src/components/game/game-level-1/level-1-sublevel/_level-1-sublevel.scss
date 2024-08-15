@@ -55,7 +55,7 @@
 
 .close-game,
 .close-modal {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   transition: font-size 0.5s;
 
   &:hover {
@@ -74,13 +74,13 @@
   transform: translateX(-50%);
   z-index: 2;
 
-  &.first {
-    bottom: 50px;
-  }
+  // &.first {
+  //   bottom: 50px;
+  // }
 
-  &.second {
-    top: 55px;
-  }
+  // &.second {
+  //   top: 55px;
+  // }
 
   &:hover {
     font-size: 3.9vw;
@@ -104,6 +104,10 @@
 
     #rocket-outer-flame {
       animation: outerFlame 1s infinite linear;
+    }
+
+    #left-window {
+      opacity: 0;
     }
   }
 
@@ -142,7 +146,7 @@
     offset-rotate: reverse;
 
     .rocket__letterB {
-      top: 28%;
+      top: 21%;
       transform: rotate(180deg);
     }
   }

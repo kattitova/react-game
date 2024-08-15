@@ -12,12 +12,13 @@
 .settings__wrapper {
   @include absolute-center;
   @include flex(column);
-  @include size(400px, 460px);
+  @include size(400px, 500px);
   background: url("./assets/img/intro-bg.png") no-repeat;
   background-size: cover;
   border-radius: 15px;
   color: #fff;
   font-size: 2rem;
+  padding: 20px;
   z-index: 9;
 }
 
@@ -53,6 +54,10 @@ datalist {
   border: 2px dashed #fff;
   border-radius: 1rem;
   padding: 5px 10px;
+
+  .rocket-color__template {
+    width: 70%;
+  }
 
   .rocket-color__palette {
     @include flex;
